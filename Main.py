@@ -1,9 +1,11 @@
 # coding: utf-8
+from datetime import timedelta
+
 from flask import Flask, render_template, request, make_response
 import hashlib
 import random
 import time
-
+# 可参考: https://blog.csdn.net/qq_40832960/article/details/107132488
 # Flask实例
 app = Flask(__name__, template_folder="www", static_folder='files', static_url_path="/files")
 # 直播状态
@@ -12,6 +14,8 @@ inLive = 0
 password = {"suit": "lovesuit", "a": "b"}
 # 字符key
 random_chars = "fsajfsjhs"
+# 设置缓存时间
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(hours=12)
 
 
 # 路径对应的执行函数，有路径就对应路径名，没路径就对应index
@@ -64,7 +68,8 @@ def console():
     if not Check():
         # 进入登录页面
         return render_template('login.html')
-    return render_template('console.html', inLive=inLive)
+    else:
+        return render_template('console.html', inLive=inLive)
 
 
 @app.route('/livestart', methods=['POST'])
@@ -83,7 +88,9 @@ def livestart():
 @app.route('/login', methods=['POST'])
 def login():
     # 取前端传值
-    pw = request.form.get("PW", str)
+    pw = request.form.get("PW","null", str)
+    if pw == "null":
+        return False
     # 循环字典
     for b in password.keys():
         # 取密码
@@ -97,7 +104,7 @@ def login():
             res.set_cookie("user", b, max_age=max_s)
             res.set_cookie("token", Check(1, b, timel), max_age=max_s)
             res.set_cookie("time", timel, max_age=max_s)
-            return "success"
+            return res
     return "你来了不该来的地方"
 
 
@@ -109,17 +116,19 @@ def md5(a):
 def Check(a=0, user="", timel=""):
     # 验证token
     global password
-    # 用户名不在集
-    if user not in password.keys():
-        return False
+    global random_chars
     if a == 0:
         user = request.cookies.get('user')
         timel = request.cookies.get('time')
         token = request.cookies.get('token')
-        if int(time.time()) - int(timel) < 0:
+        # 用户名不在集
+        if user not in password.keys():
+            return False
+        if (float(time.time()) - float(timel)) < 0:
             # 建立时间比现在还未来
             return False
-        if (int(time.time()) - int(timel)) / 86400000 > 7:
+        if (float(time.time()) - float(timel)) / 86400000 > 7:
+            # 过期
             return False
         key = token[0:3]
         return key + md5(key + user + random_chars + password.get(user) + timel) == token

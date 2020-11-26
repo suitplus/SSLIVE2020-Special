@@ -6,77 +6,76 @@
 
 <html>
 
-<head>
-    <meta charset="utf-8" lang="zh-cn">
-    <!-- 使IE在最高版本下渲染，国产浏览器用Chrome内核渲染 -->
-    <meta name="renderer" content="webkit" />
-    <meta name="force-rendering" content="webkit" />
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
-    <!-- 适配DRP > 1的屏幕 -->
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <title>SSLIVE</title>
-    <!-- 图标 -->
-    <link rel="shortcut icon" href="/files/src/img/logo/sslive-rectangle-std.png" type="image/png">
-        <!-- jQuery和Video.js使用CDN加载 -->
-    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-    <link href="https://cdn.bootcss.com/video.js/7.6.0/video-js.min.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/video.js/7.6.0/video.min.js"></script>
-    <script src="https://cdn.bootcss.com/video.js/7.6.0/lang/zh-CN.js"></script>
-    <!-- 加载Material Design Lite -->
-    <link rel="stylesheet" href="/files/mdl/material.min.css">
-    <script src="/files/mdl/material.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<head>
+		<meta charset="utf-8" lang="zh-cn">
+		<!-- 使IE在最高版本下渲染，国产浏览器用Chrome内核渲染 -->
+		<meta name="renderer" content="webkit" />
+		<meta name="force-rendering" content="webkit" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<!-- 适配DRP > 1的屏幕 -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<title>SSLIVE</title>
+		<!-- 图标 -->
+		<link rel="shortcut icon" href="/files/src/img/logo/sslive-rectangle-std.png" type="image/png">
+		<!-- jQuery和Video.js使用CDN加载 -->
+		<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+		<link href="https://cdn.bootcss.com/video.js/7.6.0/video-js.min.css" rel="stylesheet">
+		<script src="https://cdn.bootcss.com/video.js/7.6.0/video.min.js"></script>
+		<script src="https://cdn.bootcss.com/video.js/7.6.0/lang/zh-CN.js"></script>
+		<!-- 加载Material Design Lite -->
+		<link rel="stylesheet" href="/files/mdl/material.min.css">
+		<script src="/files/mdl/material.min.js"></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <link rel="stylesheet" href="/files/src/css/module/header.css">
-    <link rel="stylesheet" href="/files/src/css/module/texture.css">
-    <link rel="stylesheet" href="/files/src/css/module/title.css">
-    <link rel="stylesheet" href="/files/src/css/module/footer.css">
-    <link rel="stylesheet" href="/files/src/css/pages/live.css">
-    <link rel="stylesheet" href="/files/src/util/growl.css">
-	<link rel="stylesheet" href="../files/src/css/pages/newintroduction.css">
-    <script src="/files/src/lib/Browser.js"></script>
-    <!-- <script src="/files/src/lib/jquery.danmu.js"></script> -->
-    <script src="/files/src/util/growl.js"></script>
-    <script src="/files/src/util/checkandresize.js"></script>
-    <!--<script src="/files/src/util/danmu.js"></script>-->
-    <script src="/files/src/js/live.js"></script>
-    {% include '/module/Baidu.html' %}
-</head>
+		<link rel="stylesheet" href="/files/src/css/module/header.css">
+		<link rel="stylesheet" href="/files/src/css/module/texture.css">
+		<link rel="stylesheet" href="/files/src/css/module/title.css">
+		<link rel="stylesheet" href="/files/src/css/module/footer.css">
+		<link rel="stylesheet" href="/files/src/css/pages/live.css">
+		<link rel="stylesheet" href="/files/src/util/growl.css">
+		<link rel="stylesheet" href="../files/src/css/pages/newintroduction.css">
+		<script src="/files/src/lib/Browser.js"></script>
+		<!-- <script src="/files/src/lib/jquery.danmu.js"></script> -->
+		<script src="/files/src/util/growl.js"></script>
+		<script src="/files/src/util/checkandresize.js"></script>
+		<!--<script src="/files/src/util/danmu.js"></script>-->
+		<script src="/files/src/js/live.js"></script>
+		{% include '/module/Baidu.html' %}
+	</head>
 
-<body>
-    <!-- TODO 加入推荐使用Chrome浏览器的header -->
-    <div id="container">
-        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-            {% include '/module/guiding_intro.html' %}
-          <main class="mdl-layout__content">
+	<body>
+		<!-- TODO 加入推荐使用Chrome浏览器的header -->
+		<div id="container">
+			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+				{% include '/module/guiding_intro.html' %}
+				<main class="mdl-layout__content">
 
-    <div id="video-container">
-        <!-- <div id="danmu"></div> -->
-        <!-- x5-video-player-type="h5-page"让安卓微信视频使用H5同层播放器以实现弹幕 -->
-        <!-- https://x5.tencent.com/tbs/guide/video.html -->
-        <!-- 两个playsinline让iOS微信视频可仅在全屏状态下播放以实现弹幕 -->
-        <!-- 基本上达到了bilibili网页版的水平 -->
-        <video x5-video-player-type="h5-page" webkit-playsinline="true" playsinline="true" x-webkit-airplay="true"
-            id="video" class="video-js vjs-big-play-centered vjs-fluid"></video>
-    </div>
+					<div id="video-container">
+						<!-- <div id="danmu"></div> -->
+						<!-- x5-video-player-type="h5-page"让安卓微信视频使用H5同层播放器以实现弹幕 -->
+						<!-- https://x5.tencent.com/tbs/guide/video.html -->
+						<!-- 两个playsinline让iOS微信视频可仅在全屏状态下播放以实现弹幕 -->
+						<!-- 基本上达到了bilibili网页版的水平 -->
+						<video x5-video-player-type="h5-page" webkit-playsinline="true" playsinline="true" x-webkit-airplay="true" id="video"
+						 class="video-js vjs-big-play-centered vjs-fluid"></video>
+					</div>
 
-    <div id="video-controller-container">
-        <div id="play" style="background-image: url('/files/src/img/control/pause.svg');" class="video-controller"></div>
-        <!-- TODO 开发弹幕设置 -->
-        <!--<div id="danmusettings" style="background-image: url('/files/src/img/danmu/settings.svg');visibility: hidden;"
+					<div id="video-controller-container">
+						<div id="play" style="background-image: url('/files/src/img/control/pause.svg');" class="video-controller"></div>
+						<!-- TODO 开发弹幕设置 -->
+						<!--<div id="danmusettings" style="background-image: url('/files/src/img/danmu/settings.svg');visibility: hidden;"
             class="video-controller">
         </div>
         <div id="danmuswitch" style="background-image: url('/files/src/img/danmu/on.svg')" class="video-controller"></div>
         -->
-		<div id="fullscreen" style="background-image: url('/files/src/img/control/fullscreen.svg');" class="video-controller">
-        </div>
-    </div>
+						<div id="fullscreen" style="background-image: url('/files/src/img/control/fullscreen.svg');" class="video-controller">
+						</div>
+					</div>
 
-    {% include '/module/review.html' %}
+					{% include '/module/review.html' %}
 
-    {% include '/module/footer.html' %}
-    
-</main>
-</body>
+					{% include '/module/footer.html' %}
+
+				</main>
+	</body>
 </html>
