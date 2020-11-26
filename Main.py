@@ -30,10 +30,10 @@ def index():
         return live()
 
 
-@app.route('/linence')
+@app.route('/license')
 def linence():
     # 授权
-    return render_template('linence.html')
+    return render_template('license.html')
 
 
 @app.route('/robots.txt')
