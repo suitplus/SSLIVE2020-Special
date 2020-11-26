@@ -1,6 +1,6 @@
 var CountdownEnd = new Date("2020/12/03,00:00:00");
 $.ajax({
-	url: "/config/coding/livestart.json",
+	url: "/files/config/coding/livestart.json",
 	method: "GET",
 	success: function(data) {
 		// 请注意，这里的月份一定要减1，即一月应该是“0月”

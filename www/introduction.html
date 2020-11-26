@@ -36,6 +36,15 @@
   <div id="container">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     {% include '/module/guiding_intro.html' %}
+      <script>
+              var button = document.querySelector("#to-live-link");
+              var snackbar = document.querySelector("#live-not-on-snackbar");
+              listener(button, snackbar);
+            </script>
+          <script>
+            var button = document.querySelector("#to-live-link-alter");
+            listenerAlter(button, snackbar);
+          </script>
       <main class="mdl-layout__content">
         <div class="page-content">
           <a name="intro">
@@ -64,8 +73,4 @@
     </div>
   </div>
 </body>
-
-
 </html>
-
-
