@@ -17,6 +17,10 @@ def index():
 def about():
     return render_template('about.html', inLive=inLive)
 
+@app.route('/IE')
+def IE():
+    return render_template('IE.html')
+
 @app.route('/live')
 def live():
     return render_template('live.html')

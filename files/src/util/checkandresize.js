@@ -9,7 +9,7 @@ function check() {
     var browser = new Browser();
     // 提醒用户珍惜生命远离IE
     if (browser.browser == 'IE') {
-        window.location.href = 'IE.html';
+        window.location.href = 'IE';
     } else {
         return 1;
     }
