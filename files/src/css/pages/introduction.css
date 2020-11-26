@@ -1,0 +1,127 @@
+/* introduction.css */
+
+/* 字体引用 */
+
+/* 思源黑体Light */
+
+@font-face {
+    font-family: SiYuanLight;
+    src: url(https://pagesstatic.ssersay.cn/font/SiYuanLight.otf);
+}
+
+/* 全局定义 */
+
+html {
+    /* jQuery */
+    font-size: 16px;
+    font-family: SiYuanLight;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    background: black;
+}
+
+/* 倒计时 */
+
+#timer-container {
+    margin-top: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-image: url(/src/img/background/introduction.jpg);
+    background-position: center bottom;
+    background-size: cover;
+}
+
+#timer {
+    padding: 0.75rem;
+    z-index: 5;
+    text-align: center;
+    /* 这样写让::after不覆盖全屏 */
+    position: relative;
+    color: black;
+    white-space: nowrap;
+}
+
+#timer::after {
+    border-radius: 1.25rem;
+    z-index: -5;
+    overflow-x: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.75;
+    filter: blur(5px);
+    background: #c2c2c2;
+    content: '';
+}
+
+#timer-title {
+    margin: 0;
+    font-size: 3rem;
+    text-shadow: 0.25rem 0.25rem 10px #333;
+}
+
+#timer-countdown {
+    margin-top: 1rem;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.timer-small {
+    color: black;
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+
+/* 下一场直播内容 */
+
+#next-container {
+    padding: 0.5rem 0;
+    text-align: center;
+    width: 100%;
+    background: #2e2e2e;
+}
+
+#next-name {
+    color: #c2c2c2;
+    font-size: 2.5rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#next-time {
+    color: #c2c2c2;
+    font-size: 1.5rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* 历次直播 */
+
+#history-container {
+    margin: 2rem 0;
+    width: 100%;
+}
+
+.history-card {
+    margin: 2rem 0;
+    text-align: center;
+    width: 100%;
+}
+
+.history-image {
+    margin-top: 1rem;
+    border-width: 2.5px;
+    border-style: solid;
+    border-radius: 20px;
+    width: 90%;
+    object-fit: cover;
+}

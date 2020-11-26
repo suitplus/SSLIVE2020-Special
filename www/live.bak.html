@@ -1,0 +1,140 @@
+<!-- live.html -->
+<!-- 功能： -->
+<!-- 直播 -->
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" lang="zh-cn">
+    <!-- 使IE在最高版本下渲染，国产浏览器用Chrome内核渲染 -->
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <!-- 适配DRP > 1的屏幕 -->
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>SSLIVE</title>
+    <!-- 图标 -->
+    <link rel="shortcut icon" href="../files/src/img/logo/sslive-rectangle-std.png" type="image/png">
+    <!-- jQuery和Video.js使用CDN加载 -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/video.js/7.6.0/video-js.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/video.js/7.6.0/video.min.js"></script>
+    <script src="https://cdn.bootcss.com/video.js/7.6.0/lang/zh-CN.js"></script>
+    <link rel="stylesheet" href="/files/src/css/module/header.css">
+    <link rel="stylesheet" href="/files/src/css/module/texture.css">
+    <link rel="stylesheet" href="/files/src/css/module/title.css">
+    <link rel="stylesheet" href="/files/src/css/module/footer.css">
+    <link rel="stylesheet" href="/files/src/css/pages/live.css">
+    <link rel="stylesheet" href="/files/src/util/growl.css">
+    <script src="/files/src/lib/Browser.js"></script>
+    <!-- <script src="/files/src/lib/jquery.danmu.js"></script> -->
+    <script src="/files/src/util/growl.js"></script>
+    <script src="/files/src/util/checkandresize.js"></script>
+    <!--<script src="/files/src/util/danmu.js"></script>-->
+    <script src="/files/src/js/live.js"></script>
+    <!-- 百度统计代码 -->
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?bf08af202f2bb4ca77e68f42cff7e84b";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+<body>
+    <!-- TODO 加入推荐使用Chrome浏览器的header -->
+    <div id="header">
+        <img id="header-icon" src="../files/src/img/logo/sslive-rectangle-white.png" />
+    </div>
+
+    <div id="video-container">
+        <!-- <div id="danmu"></div> -->
+        <!-- x5-video-player-type="h5-page"让安卓微信视频使用H5同层播放器以实现弹幕 -->
+        <!-- https://x5.tencent.com/tbs/guide/video.html -->
+        <!-- 两个playsinline让iOS微信视频可仅在全屏状态下播放以实现弹幕 -->
+        <!-- 基本上达到了bilibili网页版的水平 -->
+        <video x5-video-player-type="h5-page" webkit-playsinline="true" playsinline="true" x-webkit-airplay="true"
+            id="video" class="video-js vjs-big-play-centered vjs-fluid"></video>
+    </div>
+
+    <div id="video-controller-container">
+        <div id="play" style="background-image: url('/files/src/img/control/pause.svg');" class="video-controller"></div>
+        <!-- TODO 开发弹幕设置 -->
+        <!--<div id="danmusettings" style="background-image: url('/src/img/danmu/settings.svg');visibility: hidden;"
+            class="video-controller">
+        </div>
+        <div id="danmuswitch" style="background-image: url('/src/img/danmu/on.svg')" class="video-controller"></div>
+        -->
+		<div id="fullscreen" style="background-image: url('/files/src/img/control/fullscreen.svg');" class="video-controller">
+        </div>
+    </div>
+
+    <!-- <div id="danmu-sender-container">
+        <input id="danmu-sender-input" placeholder="请输入弹幕内容" />
+        <div id="danmu-sender-button">发送弹幕</div>
+    </div>-->
+
+    <div id="content-container">
+        <span id="next-name">2020级体育节直播</span><br>
+        <span id="next-time">2020-12-03 00:00</span>
+    </div>
+
+    <div id="history-container">
+        <div class="title-container-c">
+            <p class="title-text" style="color: #f5f5f5; font-size: 2.5rem">回放 & 视频</p>
+            <p class="title-small" style="color: #f5f5f5">点击卡片观看</p>
+        </div>
+
+        <div class="history-card">
+            <div class="title-container-c-t-t texture texture-20190824">2019军训回放</div>
+            <a href="https://www.bilibili.com/video/BV1q441167Xs">
+                <img class="history-image" src="https://static.ssersay.cn/history/img/20190824.jpg" style="border-color: #b2c67a">
+            </a>
+        </div>
+
+        <div class="history-card">
+            <div class="title-container-c-t-t texture texture-20191130">2019校庆</div>
+            <a href="https://www.bilibili.com/video/BV1yJ411b7YJ">
+                <img class="history-image" src="https://static.ssersay.cn/history/img/20191130.jpg" style="border-color: #c8a06a">
+            </a>
+        </div>
+
+        <div class="history-card">
+            <div class="title-container-c-t-t texture texture-20191024">2019布服来战</div>
+            <a href="https://www.bilibili.com/video/BV1bE41117Mv">
+                <img class="history-image" src="https://static.ssersay.cn/history/img/20191024.jpg" style="border-color: #265d9e">
+            </a>
+        </div>
+
+        <div class="history-card">
+            <div class="title-container-c-t-t texture texture-20190403">2019青春诗会</div>
+            <a href="https://www.bilibili.com/video/BV1eb411T7t4">
+                <img class="history-image" src="https://static.ssersay.cn/history/img/20190403.png" style="border-color: #fbe45f">
+            </a>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div id="footerlinks">
+            <a class="footerlink" href="about.html">关于我们</a>
+            <a class="footerlink" href="linence.html">开源软件许可证</a>
+        </div>
+        <p id="footerpb">Powered By</p>
+        <div id="footerlogos">
+            <img class="footerlogo" id="suitlogo" src="../files/src/img/logo/SUIT-white.png">
+            <img class="footerlogo" id="passlogo" src="../files/src/img/logo/PASS-white.png">
+        </div>
+        <p class="footertext">广东实验中学学生会信息部</p>
+        <p class="footertext">PASS+ 极光工作室</p>
+        <p class="footertext">Copyright © 2015-2020 SUIT+ All Rights Reserved.</p>
+        <a class="footertext" href="http://beian.miit.gov.cn/" style="text-decoration:none; color: #c2c2c2;">粤ICP备15048640号-1</a>
+    </div>
+</body>
+
+</html>

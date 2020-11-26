@@ -1,0 +1,8 @@
+# robots.txt generated at http://tool.chinaz.com/robots/ 
+User-agent: *
+Disallow: 
+Disallow: /console/
+Disallow: /config/
+Disallow: /src/
+#不允许上面3个路径
+#爬虫限制文件

@@ -1,0 +1,48 @@
+/* texture.css */
+
+/* 定义材质 */
+
+/* 材质文件夹/history/src/img/texture/ */
+
+/* 使用材质时文字应直接书写，不用任何标签包裹，以兼容Safari */
+
+.texture {
+    /* 让文字透明，以透出背景图片 */
+    color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-origin: border-box;
+    /* 两行要同时书写，让背景图片仅渲染在文字处 */
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+/* 2020军训会操 */
+
+.texture-20200829 {
+    background-image: url(/src/img/texture/texture.jpg);
+}
+
+/* 2019军训 */
+
+.texture-20190824 {
+    background-image: url(https://static.ssersay.cn/history/texture/20190824.jpg);
+}
+
+/* 2019校庆 */
+
+.texture-20191130 {
+    background-image: url(https://static.ssersay.cn/history/texture/20191130.jpg);
+}
+
+/* 2019布服来战 */
+
+.texture-20191024 {
+    background-image: url(https://static.ssersay.cn/history/texture/20191024.jpg);
+}
+
+/* 2019青春诗会 */
+
+.texture-20190403 {
+    background-image: url(https://static.ssersay.cn/history/texture/20190403.jpg);
+}

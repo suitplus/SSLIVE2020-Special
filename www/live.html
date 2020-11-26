@@ -1,0 +1,232 @@
+<!-- live.html -->
+<!-- 功能： -->
+<!-- 直播 -->
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" lang="zh-cn">
+    <!-- 使IE在最高版本下渲染，国产浏览器用Chrome内核渲染 -->
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <!-- 适配DRP > 1的屏幕 -->
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>SSLIVE</title>
+    <!-- 图标 -->
+    <link rel="shortcut icon" href="../files/src/img/logo/sslive-rectangle-std.png" type="image/png">
+    <!-- 加载Material Design Lite -->
+    <link rel="stylesheet" href="../files/mdl/material.min.css">
+    <script src="../files/mdl/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- jQuery和Video.js使用CDN加载 -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/video.js/7.6.0/video-js.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/video.js/7.6.0/video.min.js"></script>
+    <script src="https://cdn.bootcss.com/video.js/7.6.0/lang/zh-CN.js"></script>
+    <link rel="stylesheet" href="/files/src/css/module/header.css">
+    <link rel="stylesheet" href="/files/src/css/module/texture.css">
+    <link rel="stylesheet" href="/files/src/css/module/title.css">
+    <link rel="stylesheet" href="/files/src/css/module/footer.css">
+    <link rel="stylesheet" href="/files/src/css/pages/live.css">
+    <link rel="stylesheet" href="/files/src/util/growl.css">
+	<link rel="stylesheet" href="../files/src/css/pages/newintroduction.css">
+    <script src="/files/src/lib/Browser.js"></script>
+    <!-- <script src="/files/src/lib/jquery.danmu.js"></script> -->
+    <script src="/files/src/util/growl.js"></script>
+    <script src="/files/src/util/checkandresize.js"></script>
+    <!--<script src="/files/src/util/danmu.js"></script>-->
+    <script src="/files/src/js/live.js"></script>
+    <!-- 百度统计代码 -->
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?bf08af202f2bb4ca77e68f42cff7e84b";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+<body>
+    <!-- TODO 加入推荐使用Chrome浏览器的header -->
+    <div id="container">
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+          <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+              <!-- Title -->
+              <span class="mdl-layout-title">SSLIVE</span>
+              <!-- Add spacer, to align navigation to the right -->
+              <div class="mdl-layout-spacer"></div>
+              <!-- Navigation. We hide it in small screens. -->
+              <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <a class="mdl-navigation__link" href="introduction.html#intro">介绍</a>
+                <a class="mdl-navigation__link" href="introduction.html#review">回播</a>
+                <a class="mdl-navigation__link" onclick="isLive()">直播</a>
+                <a class="mdl-navigation__link" href="about.html">关于</a>
+              </nav>
+            </div>
+          </header>
+          <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">SSLIVE</span>
+            <nav class="mdl-navigation">
+              <a class="mdl-navigation__link" href="introduction.html#intro">介绍</a>
+              <a class="mdl-navigation__link" href="introduction.html#review">回播</a>
+              <a class="mdl-navigation__link">直播</a>
+              <a class="mdl-navigation__link" href="about.html">关于</a>
+            </nav>
+          </div>
+          <main class="mdl-layout__content">
+
+    <div id="video-container">
+        <!-- <div id="danmu"></div> -->
+        <!-- x5-video-player-type="h5-page"让安卓微信视频使用H5同层播放器以实现弹幕 -->
+        <!-- https://x5.tencent.com/tbs/guide/video.html -->
+        <!-- 两个playsinline让iOS微信视频可仅在全屏状态下播放以实现弹幕 -->
+        <!-- 基本上达到了bilibili网页版的水平 -->
+        <video x5-video-player-type="h5-page" webkit-playsinline="true" playsinline="true" x-webkit-airplay="true"
+            id="video" class="video-js vjs-big-play-centered vjs-fluid"></video>
+    </div>
+
+    <div id="video-controller-container">
+        <div id="play" style="background-image: url('/files/src/img/control/pause.svg');" class="video-controller"></div>
+        <!-- TODO 开发弹幕设置 -->
+        <!--<div id="danmusettings" style="background-image: url('/src/img/danmu/settings.svg');visibility: hidden;"
+            class="video-controller">
+        </div>
+        <div id="danmuswitch" style="background-image: url('/src/img/danmu/on.svg')" class="video-controller"></div>
+        -->
+		<div id="fullscreen" style="background-image: url('/files/src/img/control/fullscreen.svg');" class="video-controller">
+        </div>
+    </div>
+
+    <div id="content-review">
+        <a name="review"></a>
+        <div id="content-review-title">观看我们以往的内容</div>
+        <div id="content-review-list">
+          <div id="content-review-list-left">
+            <div class="content-review-card-left mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title mdl-card--expand"
+                style="background:url('https://static.ssersay.cn/history/img/20190824.jpg') center / cover #46B6AC;">
+                <h2 class="mdl-card__title-text">2019军训回放</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Aenan convallis.
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a href="https://www.bilibili.com/video/BV1q441167Xs"
+                  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  跳转到B站
+                </a>
+              </div>
+            </div>
+            <div class="content-review-card-left mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title mdl-card--expand"
+                style="background:url('https://static.ssersay.cn/history/img/20191130.jpg') center / cover #46B6AC;">
+                <h2 class="mdl-card__title-text">2019校庆</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Aenan convallis.
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a href="https://www.bilibili.com/video/BV1yJ411b7YJ"
+                  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  跳转到B站
+                </a>
+              </div>
+            </div>
+          </div>
+          <div id="content-review-list-right">
+            <div class="content-review-card-right mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title mdl-card--expand "
+                style="background:url('https://static.ssersay.cn/history/img/20191024.jpg') center / cover #46B6AC;">
+                <h2 class="mdl-card__title-text">2019布服来战</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Aenan convallis.
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a href="https://www.bilibili.com/video/BV1bE41117Mv"
+                  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  跳转到B站
+                </a>
+              </div>
+            </div>
+            <div class="content-review-card-right mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title mdl-card--expand"
+                style="background:url('https://static.ssersay.cn/history/img/20190403.png') center / cover #46B6AC;">
+                <h2 class="mdl-card__title-text">2019青春诗会</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Aenan convallis.
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a href="https://www.bilibili.com/video/BV1eb411T7t4"
+                  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  跳转到B站
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- <div id="danmu-sender-container">
+        <input id="danmu-sender-input" placeholder="请输入弹幕内容" />
+        <div id="danmu-sender-button">发送弹幕</div>
+    </div>-->
+
+    <!--div id="content-container">
+        <span id="next-name">2020级体育节直播</span><br>
+        <span id="next-time">2020-12-03 00:00</span>
+    </div>
+
+    <div id="history-container">
+        <div class="title-container-c">
+            <p class="title-text" style="color: #f5f5f5; font-size: 2.5rem">回放 & 视频</p>
+            <p class="title-small" style="color: #f5f5f5">点击卡片观看</p>
+        </div>
+
+        <div class="history-card">
+            <div class="title-container-c-t-t texture texture-20190824">2019军训回放</div>
+            <a href="https://www.bilibili.com/video/BV1q441167Xs">
+                <img class="history-image" src="https://static.ssersay.cn/history/img/20190824.jpg" style="border-color: #b2c67a">
+            </a>
+        </div>
+
+        <div class="history-card">
+            <div class="title-container-c-t-t texture texture-20191130">2019校庆</div>
+            <a href="https://www.bilibili.com/video/BV1yJ411b7YJ">
+                <img class="history-image" src="https://static.ssersay.cn/history/img/20191130.jpg" style="border-color: #c8a06a">
+            </a>
+        </div>
+
+        <div class="history-card">
+            <div class="title-container-c-t-t texture texture-20191024">2019布服来战</div>
+            <a href="https://www.bilibili.com/video/BV1bE41117Mv">
+                <img class="history-image" src="https://static.ssersay.cn/history/img/20191024.jpg" style="border-color: #265d9e">
+            </a>
+        </div>
+
+        <div class="history-card">
+            <div class="title-container-c-t-t texture texture-20190403">2019青春诗会</div>
+            <a href="https://www.bilibili.com/video/BV1eb411T7t4">
+                <img class="history-image" src="https://static.ssersay.cn/history/img/20190403.png" style="border-color: #fbe45f">
+            </a>
+        </div>
+    </div-->
+
+    {% include '/module/footer.html' %}
+    
+</main>
+</body>
+
+</html>

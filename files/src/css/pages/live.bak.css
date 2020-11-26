@@ -1,0 +1,182 @@
+/* live.css */
+
+/* 字体引用 */
+
+/* 思源黑体Light */
+
+@font-face {
+    font-family: SiYuanLight;
+    src: url(https://pagesstatic.ssersay.cn/font/SiYuanLight.otf);
+}
+
+/* 全局定义 */
+
+html {
+    /* jQuery */
+    font-size: 16px;
+    font-family: SiYuanLight;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    background: black;
+}
+
+#video-container {
+    margin-top: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#video {
+    width: 100%;
+}
+
+/* 视频控制*/
+
+#video-controller-container {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3.5rem;
+    background: white;
+}
+
+.video-controller {
+    margin: 1rem;
+    border: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: transparent no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
+
+.video-controller:active {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+#play, #fullscreen {
+    background-size: 75%;
+}
+
+#danmu-sender-container {
+    margin: 0;
+    padding: 0.5rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: white;
+}
+
+#danmu-sender-input {
+    margin: 0;
+    padding: 0 0.5rem;
+    border: 0.1rem #d6d5d5 solid;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    display: inline-block;
+    width: 60%;
+    height: 2.8rem;
+    background-color: #f1eded;
+    font-size: 1.25rem;
+    line-height: 2.5rem;
+    outline: none;
+}
+
+#danmu-sender-button {
+    margin: 0;
+    border: 0.1rem #00a1d6 solid;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    display: inline-block;
+    text-align: center;
+    width: 25%;
+    max-width: 10rem;
+    height: 2.8rem;
+    background-color: #00a1d6;
+    font-size: 1.5rem;
+    line-height: 3rem;
+}
+
+/* 直播内容 */
+
+#content-container {
+    padding: 0.5rem 0;
+    text-align: center;
+    width: 100%;
+    background: #2e2e2e;
+}
+
+#content-name {
+    color: #fbe45f;
+    font-size: 2.5rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#content-time {
+    color: #fbe45f;
+    font-size: 1.5rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* 历次直播 */
+
+#history-container {
+    margin: 2rem 0;
+    width: 100%;
+}
+
+.history-card {
+    margin: 2rem 0;
+    text-align: center;
+    width: 100%;
+}
+
+.history-image {
+    margin-top: 1rem;
+    border-width: 2.5px;
+    border-style: solid;
+    border-radius: 20px;
+    width: 90%;
+    object-fit: cover;
+}
+
+/* 重写videojs，删除不需要的按钮 */
+
+.vjs-progress-control {
+    visibility: hidden;
+}
+
+.vjs-picture-in-picture-control {
+    display: none !important;
+}
+
+.vjs-big-play-button {
+    z-index: 20;
+}
+
+/* 重写danmu，使其margin正确 */
+
+#danmu {
+    top: 5rem !important;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+/* 重写growl-text，使其字体正确 */
+
+.growl-text {
+    font-family: initial;
+}
