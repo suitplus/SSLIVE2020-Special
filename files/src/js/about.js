@@ -5,7 +5,7 @@ function load() {
 }
 
 function toLive() {
-	var livePath = "live.html"; //如果在直播跳转地址
+	var livePath = "live"; //如果在直播跳转地址
 	window.location.href = livePath;
 }
 

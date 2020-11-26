@@ -71,6 +71,11 @@ def console():
     else:
         return render_template('console.html', inLive=inLive)
 
+@app.route('/introduction')
+def introdiction():
+    global inLive
+    return render_template("introduction.html", inLive=inLive)
+
 
 @app.route('/livestart', methods=['POST'])
 def livestart():
@@ -141,4 +146,4 @@ def Check(a=0, user="", timel=""):
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5000, debug=True)  # 映射
+    app.run(host='127.0.0.1', port=90, debug=True)  # 映射
