@@ -5,4 +5,4 @@ Use the python flask
 
 贡献者名单:(contributor list)
 
-1. Qiu Yiran (![@Nameber](https://github.com/Nambers))
+1. Qiu Yiran ([@Nameber](https://github.com/Nambers))
