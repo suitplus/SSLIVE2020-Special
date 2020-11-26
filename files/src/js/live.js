@@ -27,7 +27,7 @@ function load() {
 	        $('#play').click();
 	    }
 	}
-	$('#play').css('background-image', "url('/src/img/control/play.svg')");
+	$('#play').css('background-image', "url('/files/src/img/control/play.svg')");
     $('#play').click(function () {
 		var currentTime=new Date().getTime();
 		if((currentTime-lastRunTime)<protectTime){
@@ -36,22 +36,22 @@ function load() {
 		lastRunTime=new Date().getTime();
         if (isplay) {
             player.pause();
-            $('#play').css('background-image', "url('/src/img/control/play.svg')");
+            $('#play').css('background-image', "url('/files/src/img/control/play.svg')");
             isplay = false;
         } else {
             player.play();
-            $('#play').css('background-image', "url('/src/img/control/pause.svg')");
+            $('#play').css('background-image', "url('/files/src/img/control/pause.svg')");
             isplay = true;
         }
     });
     /*$('#danmuswitch').click(function () {
         if (isdanmu) {
             $('#danmu').danmu("setOpacity", 0);
-            $('#danmuswitch').css('background-image', "url('/src/img/danmu/off.svg')");
+            $('#danmuswitch').css('background-image', "url('/files/src/img/danmu/off.svg')");
             isdanmu = false;
         } else {
             $('#danmu').danmu("setOpacity", 0.9);
-            $('#danmuswitch').css('background-image', "url('/src/img/danmu/on.svg')");
+            $('#danmuswitch').css('background-image', "url('/files/src/img/danmu/on.svg')");
             isdanmu = true;
         }
     })*/

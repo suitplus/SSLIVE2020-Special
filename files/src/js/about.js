@@ -18,16 +18,12 @@ function listener(showSnackbarButton, snackbarContainer) {
 	};
 	showSnackbarButton.addEventListener('click', function () {
 		'use strict';
-		$.ajax({
-			url: "../../console/livestatus.json",
-			method: "GET",
-			success: function (data) {
 				// 分发到直播页面条件：JSON文件中直播已经开始
-				if (data.Live) {//是否开播
+				if (inLive==1) {//是否开播
 					toLive();
 				} else {
 					$.ajax({
-						url: "/config/coding/livestart.json",
+						url: "/files/config/coding/livestart.json",
 						method: "GET",
 						success: function (data) {
 							var nowtime = new Date().getTime(); //当前时间
@@ -77,13 +73,6 @@ function listener(showSnackbarButton, snackbarContainer) {
 					});
 
 				}
-			},
-			error: function () {
-				$('#loading').text(" ");
-				$("#errmsg").text("请检查网络链接并刷新页面");
-				return;
-			}
-		});
 	});
 }
 
