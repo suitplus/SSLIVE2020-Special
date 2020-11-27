@@ -20,8 +20,11 @@ function load() {
         poster: "/files/src/img/background/newintro.jpg", // 预览图
         fullscreen: { options: { navigationUI: 'show' } }
     });
+    //地址 http://suit.ssersay.cn/AppName/StreamName.m3u8?auth_key={鉴权串}
     //player.src("https://suit.ssersay.cn/SUIT/stream.m3u8");//直播地址
-	player.src("http://ivi.bupt.edu.cn/hls/cctv1.m3u8");//连接CCTV-1测试
+	//连接CCTV-1测试http://ivi.bupt.edu.cn/hls/cctv1.m3u8
+    // 推流地址 rtmp://push.ssersay.cn/Live/Living
+    player.src("http://suit.ssersay.cn/Live/Living.m3u8");
 	document.onkeydown = function() {
 	    //回车提交
 	    if (event.keyCode == 32) {

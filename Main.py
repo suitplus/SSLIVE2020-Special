@@ -8,7 +8,7 @@ monkey.patch_all()
 from datetime import timedelta
 import config
 from flask_cache import Cache
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, redirect
 import random
 import time
 
@@ -110,6 +110,14 @@ def cacheclear():
     cache.clear()
     return "finish"
 
+@app.before_request
+def before_request():
+    if request.url.startswith('http://') and request.url.find("/live") == -1:
+        url = request.url.replace('http://', 'https://', 1)
+        return redirect(url, code=301)
+    elif request.url.startswith('https://') and request.url.find("/live") != -1:
+        url = request.url.replace('https://', 'http://', 1)
+        return redirect(url, code=301)
 
 @app.route('/login', methods=['POST'])
 # @cache.cached()
