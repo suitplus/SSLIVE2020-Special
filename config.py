@@ -19,6 +19,12 @@ static_root = "files"
 static_url_root = "/files"
 # cookies有效期，天为单位
 cookies_time = 7
+# flask_cache缓存类型
+cache_type = "simple"
+# 映射ip，如果放在服务器给外网要填0.0.0.0(局域网)，本地调试127.0.0.1即可
+ip = "127.0.0.1"
+# 映射端口
+port = 90
 
 
 def md5(a):

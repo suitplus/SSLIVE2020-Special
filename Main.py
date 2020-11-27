@@ -6,13 +6,13 @@ from flask import Flask, render_template, request, make_response
 import random
 import time
 
-# 可参考: https://blog.csdn.net/qq_40832960/article/details/107132488
+# flask可参考: https://blog.csdn.net/qq_40832960/article/details/107132488
 cache = Cache()
 # Flask实例
 app = Flask(__name__, template_folder=config.root, static_folder=config.static_root,
             static_url_path=config.static_url_root)
 # 缓存初始化
-cache.init_app(app, config={'CACHE_TYPE': 'simple', 'CACHE_DEFAULT_TIMEOUT': config.cache_out_time})
+cache.init_app(app, config={'CACHE_TYPE': config.cache_type, 'CACHE_DEFAULT_TIMEOUT': config.cache_out_time})
 # 设置静态文件缓存时间
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(days=config.cache_time[0], hours=config.cache_time[1],
                                                     minutes=config.cache_time[2])
@@ -149,4 +149,4 @@ def Check(a=0, user="", timel=""):
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=90, debug=True)  # 映射
+    app.run(host=config.ip, port=config.port, debug=True)  # 映射
