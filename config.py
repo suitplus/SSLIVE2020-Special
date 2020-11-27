@@ -24,7 +24,8 @@ cache_type = "simple"
 # 映射ip，如果放在服务器给外网要填0.0.0.0(局域网)，本地调试127.0.0.1即可
 ip = "127.0.0.1"
 # 映射端口
-port = 90
+http_port = 90
+https_port = 443
 
 
 def md5(a):

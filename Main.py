@@ -3,6 +3,7 @@
 # gevent
 from gevent import monkey
 from gevent.pywsgi import WSGIServer
+
 monkey.patch_all()
 from datetime import timedelta
 import config
@@ -163,7 +164,31 @@ def Check(a=0, user="", timel=""):
         return False
 
 
+import threading
+
+
+def start(ip, port, https):
+    from werkzeug.debug import DebuggedApplication
+
+    dapp = DebuggedApplication(app, evalex=True)
+    if https:
+        https_server = WSGIServer((ip, port), dapp, certfile="SSL/4837013_www.ssersay.cn.pem",
+                                  keyfile="SSL/4837013_www.ssersay.cn.key")
+        https_server.serve_forever()
+        print("https server start")
+    else:
+        http_server = WSGIServer((ip, port), dapp)
+        http_server.serve_forever()
+        print("http server start")
+
+
 if __name__ == '__main__':
-    # app.run(host=config.ip, port=config.port, debug=True)  # 映射
-    http_server = WSGIServer((config.ip, config.port), app)
-    http_server.serve_forever()
+    # app.run(host=config.ip, port=config.port, debug=True, ssl_context=("SSL/4837013_www.ssersay.cn.pem",
+    #                                                                    "SSL/4837013_www.ssersay.cn.key"))  # 映射
+    t1 = threading.Thread(target=start, args=(config.ip, config.http_port, False))
+    t2 = threading.Thread(target=start, args=(config.ip, config.https_port, True))
+    t1.start()
+    t2.start()
+    print("Start servers")
+    # http_server = WSGIServer((config.ip, 80), dapp)
+    # http_server.serve_forever()
