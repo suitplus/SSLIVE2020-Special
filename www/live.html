@@ -49,15 +49,17 @@
 			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 				{% include '/module/guiding_intro.html' %}
 				<main class="mdl-layout__content">
-
-					<div id="video-container">
-						<!-- <div id="danmu"></div> -->
-						<!-- x5-video-player-type="h5-page"让安卓微信视频使用H5同层播放器以实现弹幕 -->
-						<!-- https://x5.tencent.com/tbs/guide/video.html -->
-						<!-- 两个playsinline让iOS微信视频可仅在全屏状态下播放以实现弹幕 -->
-						<!-- 基本上达到了bilibili网页版的水平 -->
-						<video x5-video-player-type="h5-page" webkit-playsinline="true" playsinline="true" x-webkit-airplay="true" id="video"
-						 class="video-js vjs-big-play-centered vjs-fluid"></video>
+					<!-- 此处有个空div是为了防止一个错误(https://blog.csdn.net/qq_39100704/article/details/100918880) -->
+					<div>
+						<div id="video-container">
+							<!-- <div id="danmu"></div> -->
+							<!-- x5-video-player-type="h5-page"让安卓微信视频使用H5同层播放器以实现弹幕 -->
+							<!-- https://x5.tencent.com/tbs/guide/video.html -->
+							<!-- 两个playsinline让iOS微信视频可仅在全屏状态下播放以实现弹幕 -->
+							<!-- 基本上达到了bilibili网页版的水平 -->
+							<video x5-video-player-type="h5-page" webkit-playsinline="true" playsinline="true" x-webkit-airplay="true" id="video"
+							 class="video-js vjs-big-play-centered vjs-fluid"></video>
+						</div>
 					</div>
 
 					<div id="video-controller-container">
