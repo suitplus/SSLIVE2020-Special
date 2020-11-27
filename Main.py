@@ -27,7 +27,7 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(days=config.cache_time[0], h
 # 路径对应的执行函数，有路径就对应路径名，没路径就对应index
 # 如@app.route('/login') 对应def login()
 @app.route('/')
-@cache.cached()
+# @cache.cached()
 def index():
     # 首页判断
     if config.inLive == 0:
@@ -91,7 +91,7 @@ def introduction():
 
 # 开启直播路径，接受post
 @app.route('/livestart', methods=['POST'])
-@cache.cached()
+# @cache.cached()
 def liveStart():
     if not Check():
         # 防止在没token的情况开启直播
@@ -109,7 +109,7 @@ def cacheclear():
     return "finish"
 
 @app.route('/login', methods=['POST'])
-@cache.cached()
+# @cache.cached()
 def login():
     # 取前端传值
     pw = request.form.get("PW", "null", str)
