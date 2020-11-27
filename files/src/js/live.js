@@ -16,7 +16,8 @@ function load() {
     player = videojs('video', {
         liveui: true,
         controls: true,
-        preload: true,
+        preload: true, // 预加载
+        poster: "/files/src/img/background/newintro.jpg", // 预览图
         fullscreen: { options: { navigationUI: 'show' } }
     });
     //player.src("https://suit.ssersay.cn/SUIT/stream.m3u8");//直播地址
