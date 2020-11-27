@@ -174,12 +174,12 @@ def start(ip, port, https):
     if https:
         https_server = WSGIServer((ip, port), dapp, certfile="SSL/4837013_www.ssersay.cn.pem",
                                   keyfile="SSL/4837013_www.ssersay.cn.key")
-        https_server.serve_forever()
         print("https server start")
+        https_server.serve_forever()
     else:
         http_server = WSGIServer((ip, port), dapp)
-        http_server.serve_forever()
         print("http server start")
+        http_server.serve_forever()
 
 
 if __name__ == '__main__':
