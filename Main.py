@@ -103,6 +103,9 @@ def liveStart():
         config.inLive = 0
     return "success"
 
+@app.route('/cache_clear')
+def cacheclear():
+    cache.clear()
 
 @app.route('/login', methods=['POST'])
 @cache.cached()
