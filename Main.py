@@ -1,4 +1,9 @@
 # coding: utf-8
+
+# gevent
+from gevent import monkey
+from gevent.pywsgi import WSGIServer
+monkey.patch_all()
 from datetime import timedelta
 import config
 from flask_cache import Cache
@@ -69,7 +74,6 @@ def live():
 @app.route('/admin')
 # @cache.cached()
 def admin():
-    print(Check())
     # 管理路径
     if not Check():
         # 进入登录页面
@@ -160,4 +164,6 @@ def Check(a=0, user="", timel=""):
 
 
 if __name__ == '__main__':
-    app.run(host=config.ip, port=config.port, debug=True)  # 映射
+    # app.run(host=config.ip, port=config.port, debug=True)  # 映射
+    http_server = WSGIServer((config.ip, config.port), app)
+    http_server.serve_forever()
