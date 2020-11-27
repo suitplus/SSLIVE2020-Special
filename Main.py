@@ -67,8 +67,9 @@ def live():
 
 
 @app.route('/admin')
-@cache.cached()
-def console():
+# @cache.cached()
+def admin():
+    print(Check())
     # 管理路径
     if not Check():
         # 进入登录页面
@@ -125,26 +126,36 @@ def login():
 def Check(a=0, user="", timel=""):
     # 验证token
     if a == 0:
-        user = request.cookies.get('user')
-        timel = request.cookies.get('time')
-        token = request.cookies.get('token')
+        user = request.cookies.get("user", default="null", type=str)
+        timel = request.cookies.get("time", default="null", type=str)
+        token = request.cookies.get('token', default="null", type=str)
+        # 参数为空
+        if user == "null" or timel == "null" or token == "null":
+            return False
         # 用户名不在集
         if user not in config.password.keys():
+            print("用户名非法")
             return False
         if (float(time.time()) - float(timel)) < 0:
             # 建立时间比现在还未来
+            print("时间戳非法")
             return False
         if (float(time.time()) - float(timel)) / 86400000 > config.cookies_time:
             # 过期
+            print("时间戳非法")
             return False
         # 随机数key
         key = token[0:3]
-        return config.encryption(key, user, timel) == token
+        v = config.encryption(key, user, timel) == token
+        if not v:
+            print("token非法")
+        return v
     elif a == 1:
         rkey = str(random.randint(100, 999))
         return config.encryption(rkey, user, timel)
     else:
         # a不正常
+        print("a参数非法")
         return False
 
 

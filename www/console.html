@@ -37,14 +37,10 @@
 			}
 		</style>
 		<script>
-			var inLive = 0
+			var inLive = 0;
 
 			function load() {
-				inLive = {
-					{
-						inLive
-					}
-				};
+				inLive = {{ inLive }};
 				if (inLive == 1) {
 					$("#LiveStatusReminder").css("visibility", "hidden");
 					$('#LiveControlButton').text("停 止 直 播");
