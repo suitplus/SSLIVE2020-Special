@@ -106,6 +106,7 @@ def liveStart():
 @app.route('/cache_clear')
 def cacheclear():
     cache.clear()
+    return "finish"
 
 @app.route('/login', methods=['POST'])
 @cache.cached()
