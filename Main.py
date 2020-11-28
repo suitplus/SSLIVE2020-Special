@@ -12,11 +12,14 @@ from flask import Flask, render_template, request, make_response, redirect
 import random
 import time
 
+# from flask_cors import CORS
+
 # flask可参考: https://blog.csdn.net/qq_40832960/article/details/107132488
 cache = Cache()
 # Flask实例
 app = Flask(__name__, template_folder=config.root, static_folder=config.static_root,
             static_url_path=config.static_url_root)
+# CORS(app) # 如果要解决跨域就用这个
 # 缓存初始化
 cache.init_app(app, config={'CACHE_TYPE': config.cache_type, 'CACHE_DEFAULT_TIMEOUT': config.cache_out_time})
 # 设置静态文件缓存时间
@@ -110,14 +113,13 @@ def cacheclear():
     cache.clear()
     return "finish"
 
+
 @app.before_request
 def before_request():
-    if request.url.startswith('http://') and request.url.find("/live") == -1:
+    if request.url.startswith('http://'):
         url = request.url.replace('http://', 'https://', 1)
         return redirect(url, code=301)
-    elif request.url.startswith('https://') and request.url.find("/live") != -1:
-        url = request.url.replace('https://', 'http://', 1)
-        return redirect(url, code=301)
+
 
 @app.route('/login', methods=['POST'])
 # @cache.cached()

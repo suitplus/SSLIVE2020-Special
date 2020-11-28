@@ -21,6 +21,7 @@ function changelive() {
 	$.ajax({
 		url: "/livestart",
 		method: "POST",
+		data: {},
 		success: function(data) {
 			inLive = (inLive == 1 ? 0 : 1);
 			if (data == "success") {
