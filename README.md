@@ -33,4 +33,4 @@ All the source code in this repository (EXCEPT FOR the code in mdl, src/lib/ and
 
 后端贡献者名单:
 
-1. Qiu Yiran ([@Nameber](https://github.com/Nambers))
+1. Qiu Yiran ([@Namebers](https://github.com/Nambers))
