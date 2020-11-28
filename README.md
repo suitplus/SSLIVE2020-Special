@@ -23,13 +23,13 @@ All the source code in this repository (EXCEPT FOR the code in mdl, src/lib/ and
 
 前端贡献者名单:
 
-1. Lin Sixing (@LSX-s-Software)
-2. Zeng Wenyi (@vincenttsang)
+1. Lin Sixing ([@LSX-s-Software](https://github.com/LSX-s-Software))
+2. Zeng Wenyi ([@vincenttsang](https://github.com/vincenttsang))
 3. Zeng Chengzhi
-4. Wu Kai (@wk2003)
-5. Jia Boyi (@ap0stader)
-6. Qiu Yiran (@Nambers)
-7. Chen Qixuan (@Asiimoviet)
+4. Wu Kai ([@wk2003](https://github.com/wk2003))
+5. Jia Boyi ([@ap0stader](https://github.com/ap0stader))
+6. Qiu Yiran ([@Nambers](https://github.com/Nambers))
+7. Chen Qixuan ([@Asiimoviet](https://github.com/Asiimoviet))
 
 后端贡献者名单:
 
