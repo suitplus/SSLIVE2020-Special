@@ -25,10 +25,7 @@ cache.init_app(app, config={'CACHE_TYPE': config.cache_type, 'CACHE_DEFAULT_TIME
 # 设置静态文件缓存时间
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(days=config.cache_time[0], hours=config.cache_time[1],
                                                     minutes=config.cache_time[2])
-
 app.config['threaded'] = True
-
-app.config['processes'] = 50
 
 
 # 路径对应的执行函数，有路径就对应路径名，没路径就对应index
