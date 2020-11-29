@@ -182,31 +182,35 @@ def Check(a=0, user="", timel=""):
         return False
 
 
-import threading
-
-
-def start(ip, port, https):
-    from werkzeug.debug import DebuggedApplication
-
-    dapp = DebuggedApplication(app, evalex=True)
-    if https:
-        https_server = WSGIServer((ip, port), dapp, certfile="SSL/4837013_www.ssersay.cn.pem",
-                                  keyfile="SSL/4837013_www.ssersay.cn.key")
-        print("https server start")
-        https_server.serve_forever()
-    else:
-        http_server = WSGIServer((ip, port), dapp)
-        print("http server start")
-        http_server.serve_forever()
-
+# import threading
+#
+#
+# def start(ip, port, https):
+#     from werkzeug.debug import DebuggedApplication
+#
+#     dapp = DebuggedApplication(app, evalex=True)
+#     if https:
+#         https_server = WSGIServer((ip, port), dapp, certfile="SSL/4837013_www.ssersay.cn.pem",
+#                                   keyfile="SSL/4837013_www.ssersay.cn.key", spawn=5)
+#         print("https server start")
+#         https_server.serve_forever()
+#     else:
+#         http_server = WSGIServer((ip, port), dapp)
+#         print("http server start")
+#         http_server.serve_forever()
+#
 
 if __name__ == '__main__':
     # app.run(host=config.ip, port=config.port, debug=True, ssl_context=("SSL/4837013_www.ssersay.cn.pem",
     #                                                                    "SSL/4837013_www.ssersay.cn.key"))  # 映射
-    t1 = threading.Thread(target=start, args=(config.ip, config.http_port, False))
-    t2 = threading.Thread(target=start, args=(config.ip, config.https_port, True))
-    t1.start()
-    t2.start()
-    print("Start servers")
+    # t1 = threading.Thread(target=start, args=(config.ip, config.http_port, False)) # 80也就是http端口監聽
+    # t2 = threading.Thread(target=start, args=(config.ip, config.https_port, True))
+    # t1.start()
+    # t2.start()
+    # print("Start servers")
     # http_server = WSGIServer((config.ip, 80), dapp)
     # http_server.serve_forever()
+    https_server = WSGIServer((config.ip, config.https_port), app, certfile="SSL/4837013_www.ssersay.cn.pem",
+                              keyfile="SSL/4837013_www.ssersay.cn.key", spawn=5)
+    print("https server start")
+    https_server.serve_forever()
