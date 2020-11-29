@@ -182,6 +182,7 @@ def Check(a=0, user="", timel=""):
         return False
 
 
+# 同時支持httph和https方案
 # import threading
 #
 #
@@ -203,6 +204,7 @@ def Check(a=0, user="", timel=""):
 if __name__ == '__main__':
     # app.run(host=config.ip, port=config.port, debug=True, ssl_context=("SSL/4837013_www.ssersay.cn.pem",
     #                                                                    "SSL/4837013_www.ssersay.cn.key"))  # 映射
+    # 同時支持httph和https方案
     # t1 = threading.Thread(target=start, args=(config.ip, config.http_port, False)) # 80也就是http端口監聽
     # t2 = threading.Thread(target=start, args=(config.ip, config.https_port, True))
     # t1.start()
@@ -211,6 +213,6 @@ if __name__ == '__main__':
     # http_server = WSGIServer((config.ip, 80), dapp)
     # http_server.serve_forever()
     https_server = WSGIServer((config.ip, config.https_port), app, certfile="SSL/4837013_www.ssersay.cn.pem",
-                              keyfile="SSL/4837013_www.ssersay.cn.key", spawn=5)
+                              keyfile="SSL/4837013_www.ssersay.cn.key", spawn=200)
     print("https server start")
     https_server.serve_forever()
