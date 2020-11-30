@@ -13,14 +13,14 @@ import random
 import time
 import requests
 
-# from flask_cors import CORS
+from flask_cors import CORS
 
 # flask可参考: https://blog.csdn.net/qq_40832960/article/details/107132488
 cache = Cache()
 # Flask实例
 app = Flask(__name__, template_folder=config.root, static_folder=config.static_root,
             static_url_path=config.static_url_root)
-# CORS(app) # 如果要解决跨域就用这个
+CORS(app) # 如果要解决跨域就用这个
 # 缓存初始化
 cache.init_app(app, config={'CACHE_TYPE': config.cache_type, 'CACHE_DEFAULT_TIMEOUT': config.cache_out_time})
 # 设置静态文件缓存时间
@@ -35,11 +35,12 @@ app.config['threaded'] = True
 # @cache.cached()
 def index():
     # 首页判断
-    if config.inLive == 0:
-        return render_template('introduction.html', inLive=config.inLive)
-    else:
+    if GetLiveState() == 1:
         # 跳转到直播
         return live()
+    else:
+        return render_template('introduction.html', inLive=GetLiveState())
+
 
 
 @app.route('/license')
@@ -60,7 +61,7 @@ def robots():
 @cache.cached()
 def about():
     # 关于我们页面
-    return render_template('about.html', inLive=config.inLive)
+    return render_template('about.html', inLive=GetLiveState())
 
 
 @app.route('/IE')
@@ -85,40 +86,24 @@ def admin():
         # 进入登录页面
         return render_template('login.html')
     else:
-        return render_template('console.html', inLive=config.inLive)
+        return render_template('console.html', inLive=GetLiveState())
 
 
 @app.route('/introduction')
 @cache.cached()
 def introduction():
-    return render_template("introduction.html", inLive=config.inLive)
+    return render_template("introduction.html", inLive=GetLiveState())
 
 
 # 开启直播路径，接受post
 @app.route('/livestart', methods=['POST'])
 # @cache.cached()
 def liveStart():
-    # u = request.args.get("u", default="null")
-    # t = request.args.get("t", default="null")
-    # if (not u == "null") and (not t == "null"):
         if not Check():
             # 防止在没token的情况开启直播
             return "Cookies 失效"
-    # else:
-    #     if not Check(0, u, t):
-    #         return "错误"
-    # 更改直播状态
-    # if config.IsMain:
-        if config.inLive == 0:
-            config.inLive = 1
-        else:
-            config.inLive = 0
+        ChangeLiveState()
         return "success"
-    # else:
-    #     url = config.LiveStateUrl
-    #     data = {"key": "value"}
-    #     res = requests.post(url=url, data=data)
-    #     print(res.text)
 
 
 
@@ -207,8 +192,19 @@ def start(ip, port):
     print("https server start")
     https_server.serve_forever()
 
+def GetLiveState():
+    url = "http://127.0.0.1:" + str(config.LiveStatePort)
+    data = {"type": "G"}
+    res = requests.post(url=url, data=data)
+    return int(res.text)
 
-if __name__ == '__main__':
+def ChangeLiveState():
+    url = "http://127.0.0.1:" + str(config.LiveStatePort)
+    data = {"type": "C"}
+    r = requests.post(url=url, data=data)
+    return ""
+
+def setup():
     # app.run(host=config.ip, port=config.port, debug=True, ssl_context=("SSL/4837013_www.ssersay.cn.pem",
     #                                                                    "SSL/4837013_www.ssersay.cn.key"))  # 映射
     # 同時支持httph和https方案

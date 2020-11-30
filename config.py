@@ -1,10 +1,8 @@
 # 网站配置文件
 import hashlib
 
-# 直播初始状态
-inLive = 0
 # 账号密码字典集
-password = {"suit": "lovesuit", "a": "b"}
+password = {"suit": "lovesuit"}
 # cookie加密用，字符key，更改会使之前用这个key加密的cookies失效
 random_chars = "fsajfsjhs"
 # 静态文件缓存时间，[day,hour,minutes]
@@ -25,8 +23,7 @@ cache_type = "simple"
 ip = "127.0.0.1"
 # 映射端口,和nginx的反向代理相同
 port = [8080, 9090, 888, 999]
-IsMain = True
-LiveStateUrl = ""
+LiveStatePort = 555
 
 
 def md5(a):
