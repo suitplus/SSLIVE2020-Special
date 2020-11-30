@@ -11,6 +11,7 @@ from flask_cache import Cache
 from flask import Flask, render_template, request, make_response, redirect
 import random
 import time
+import requests
 
 # from flask_cors import CORS
 
@@ -97,15 +98,28 @@ def introduction():
 @app.route('/livestart', methods=['POST'])
 # @cache.cached()
 def liveStart():
-    if not Check():
-        # 防止在没token的情况开启直播
-        return "Cookies 失效"
+    # u = request.args.get("u", default="null")
+    # t = request.args.get("t", default="null")
+    # if (not u == "null") and (not t == "null"):
+        if not Check():
+            # 防止在没token的情况开启直播
+            return "Cookies 失效"
+    # else:
+    #     if not Check(0, u, t):
+    #         return "错误"
     # 更改直播状态
-    if config.inLive == 0:
-        config.inLive = 1
-    else:
-        config.inLive = 0
-    return "success"
+    # if config.IsMain:
+        if config.inLive == 0:
+            config.inLive = 1
+        else:
+            config.inLive = 0
+        return "success"
+    # else:
+    #     url = config.LiveStateUrl
+    #     data = {"key": "value"}
+    #     res = requests.post(url=url, data=data)
+    #     print(res.text)
+
 
 
 @app.route('/cache_clear')
@@ -146,15 +160,16 @@ def login():
     return "你来了不该来的地方"
 
 
-def Check(a=0, user="", timel=""):
+def Check(a=0, user="Fnull", timel="Fnull"):
     # 验证token
     if a == 0:
-        user = request.cookies.get("user", default="null", type=str)
-        timel = request.cookies.get("time", default="null", type=str)
-        token = request.cookies.get('token', default="null", type=str)
-        # 参数为空
-        if user == "null" or timel == "null" or token == "null":
-            return False
+        if (user == "Fnull") and (timel == "Fnull"):
+            user = request.cookies.get("user", default="null", type=str)
+            timel = request.cookies.get("time", default="null", type=str)
+            token = request.cookies.get('token', default="null", type=str)
+            # 参数为空
+            if user == "null" or timel == "null" or token == "null":
+                return False
         # 用户名不在集
         if user not in config.password.keys():
             print("用户名非法")

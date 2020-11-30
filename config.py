@@ -24,7 +24,9 @@ cache_type = "simple"
 # 映射ip，如果放在服务器给外网要填0.0.0.0(局域网)，本地调试127.0.0.1即可
 ip = "127.0.0.1"
 # 映射端口,和nginx的反向代理相同
-port = [8080, 9090]
+port = [8080, 9090, 888, 999]
+IsMain = True
+LiveStateUrl = ""
 
 
 def md5(a):

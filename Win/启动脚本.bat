@@ -1,5 +1,5 @@
 cd nginx-1.18.0/
 start nginx.exe
-cd ../
+cd ../../
 python Main.py
 pause
