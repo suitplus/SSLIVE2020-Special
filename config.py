@@ -23,9 +23,8 @@ cookies_time = 7
 cache_type = "simple"
 # 映射ip，如果放在服务器给外网要填0.0.0.0(局域网)，本地调试127.0.0.1即可
 ip = "127.0.0.1"
-# 映射端口 通常为80和443
-http_port = 80
-https_port = 443
+# 映射端口,和nginx的反向代理相同
+port = [8080, 9090]
 
 
 def md5(a):

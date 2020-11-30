@@ -183,23 +183,15 @@ def Check(a=0, user="", timel=""):
 
 
 # 同時支持httph和https方案
-# import threading
-#
-#
-# def start(ip, port, https):
-#     from werkzeug.debug import DebuggedApplication
-#
-#     dapp = DebuggedApplication(app, evalex=True)
-#     if https:
-#         https_server = WSGIServer((ip, port), dapp, certfile="SSL/4837013_www.ssersay.cn.pem",
-#                                   keyfile="SSL/4837013_www.ssersay.cn.key", spawn=5)
-#         print("https server start")
-#         https_server.serve_forever()
-#     else:
-#         http_server = WSGIServer((ip, port), dapp)
-#         print("http server start")
-#         http_server.serve_forever()
-#
+import threading
+
+
+def start(ip, port):
+    https_server = WSGIServer((ip, port), app, certfile="SSL/4837013_www.ssersay.cn.pem",
+                              keyfile="SSL/4837013_www.ssersay.cn.key", spawn=200)
+    print("https server start")
+    https_server.serve_forever()
+
 
 if __name__ == '__main__':
     # app.run(host=config.ip, port=config.port, debug=True, ssl_context=("SSL/4837013_www.ssersay.cn.pem",
@@ -212,7 +204,8 @@ if __name__ == '__main__':
     # print("Start servers")
     # http_server = WSGIServer((config.ip, 80), dapp)
     # http_server.serve_forever()
-    https_server = WSGIServer((config.ip, config.https_port), app, certfile="SSL/4837013_www.ssersay.cn.pem",
-                              keyfile="SSL/4837013_www.ssersay.cn.key", spawn=200)
-    print("https server start")
-    https_server.serve_forever()
+    for port in config.port:
+        t = threading.Thread(target=start, args=(config.ip, port))
+        t.start()
+        print("Server start in ", config.ip, ":", port)
+    print("all server start")

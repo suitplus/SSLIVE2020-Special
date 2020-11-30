@@ -1,0 +1,5 @@
+2020/11/30 11:43:38 [notice] 10640#9912: signal process started
+2020/11/30 11:45:45 [emerg] 8888#16528: no "ssl_certificate" is defined for the "listen ... ssl" directive in C:\Users\19308\Desktop\git\SSLIVE2020-Special\nginx-1.18.0/conf/nginx.conf:45
+2020/11/30 11:46:51 [emerg] 19444#11972: cannot load certificate "C:\Users\19308\Desktop\git\SSLIVE2020-Special\nginx-1.18.0/conf/../SSL/4837013_www.ssersay.cn.pem": BIO_new_file() failed (SSL: error:02001003:system library:fopen:No such process:fopen('C:\Users\19308\Desktop\git\SSLIVE2020-Special\nginx-1.18.0/conf/../SSL/4837013_www.ssersay.cn.pem','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2020/11/30 11:47:05 [notice] 16688#10384: signal process started
+2020/11/30 11:47:45 [notice] 17524#5548: signal process started
