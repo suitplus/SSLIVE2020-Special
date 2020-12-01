@@ -1,7 +1,7 @@
 # SSLIVE2020-Special
 Use the python flask instead of PHP
 
-使用python flask框架替换php做后端
+使用(html + javascript + css)前端 + (flask + gevent)python后端 + (nginx)负载均衡和反向代理，替换单一的php做后端
 
 原仓库(origin url): https://github.com/suitplus/SSLIVE2019/
 
