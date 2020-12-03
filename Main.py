@@ -20,7 +20,7 @@ cache = Cache()
 # Flask实例
 app = Flask(__name__, template_folder=config.root, static_folder=config.static_root,
             static_url_path=config.static_url_root)
-CORS(app) # 如果要解决跨域就用这个
+CORS(app)  # 如果要解决跨域就用这个
 # 缓存初始化
 cache.init_app(app, config={'CACHE_TYPE': config.cache_type, 'CACHE_DEFAULT_TIMEOUT': config.cache_out_time})
 # 设置静态文件缓存时间
@@ -40,7 +40,6 @@ def index():
         return live()
     else:
         return render_template('introduction.html', inLive=GetLiveState())
-
 
 
 @app.route('/license')
@@ -71,6 +70,7 @@ def IE():
     return render_template('IE.html')
 
 
+# 下面两行调试的时候加，非调试在正式情况下最好去掉
 @app.route('/live')
 @cache.cached()
 def live():
@@ -99,12 +99,11 @@ def introduction():
 @app.route('/livestart', methods=['POST'])
 # @cache.cached()
 def liveStart():
-        if not Check():
-            # 防止在没token的情况开启直播
-            return "Cookies 失效"
-        ChangeLiveState()
-        return "success"
-
+    if not Check():
+        # 防止在没token的情况开启直播
+        return "Cookies 失效"
+    ChangeLiveState()
+    return "success"
 
 
 @app.route('/cache_clear')
@@ -116,6 +115,7 @@ def cacheclear():
 
 @app.before_request
 def before_request():
+    # return redirect(bilbil直播间网址,code=301) # 紧急跳转，或在nginx加301跳转
     if request.url.startswith('http://'):
         url = request.url.replace('http://', 'https://', 1)
         return redirect(url, code=301)
@@ -192,17 +192,20 @@ def start(ip, port):
     print("https server start")
     https_server.serve_forever()
 
+
 def GetLiveState():
     url = "http://127.0.0.1:" + str(config.LiveStatePort)
     data = {"type": "G"}
     res = requests.post(url=url, data=data)
     return int(res.text)
 
+
 def ChangeLiveState():
     url = "http://127.0.0.1:" + str(config.LiveStatePort)
     data = {"type": "C"}
     r = requests.post(url=url, data=data)
     return ""
+
 
 def setup():
     # app.run(host=config.ip, port=config.port, debug=True, ssl_context=("SSL/4837013_www.ssersay.cn.pem",
