@@ -26,7 +26,7 @@
 		<link rel="stylesheet" href="/files/mdl/material.min.css">
 		<script src="/files/mdl/material.min.js"></script>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
+		<link rel="stylesheet" href="/files/src/css/pages/danmu.css" />
 		<link rel="stylesheet" href="/files/src/css/module/header.css">
 		<link rel="stylesheet" href="/files/src/css/module/texture.css">
 		<link rel="stylesheet" href="/files/src/css/module/title.css">
@@ -40,7 +40,6 @@
 		<script src="/files/src/util/checkandresize.js"></script>
 		<!--<script src="/files/src/util/danmu.js"></script>-->
 		<script src="/files/src/js/live.js"></script>
-		{% include '/module/Baidu.html' %}
 	</head>
 
 	<body>
@@ -58,7 +57,13 @@
 							<!-- 两个playsinline让iOS微信视频可仅在全屏状态下播放以实现弹幕 -->
 							<!-- 基本上达到了bilibili网页版的水平 -->
 							<video x5-video-player-type="h5-page" webkit-playsinline="true" playsinline="true" x-webkit-airplay="true" id="video"
-							 class="video-js vjs-big-play-centered vjs-fluid"></video>
+							 class="video-js vjs-big-play-centered vjs-fluid">
+							 </video>
+							 <div class="box">
+							    <div class="barrage-container-wrap clearfix">
+							     <div class="barrage-container">
+							     </div> 
+							   </div>
 						</div>
 					</div>
 
@@ -73,11 +78,17 @@
 						<div id="fullscreen" style="background-image: url('/files/src/img/control/fullscreen.svg');" class="video-controller">
 						</div>
 					</div>
-
+					
+					  <div class="send-wrap">
+					    <input type="text" class="input" placeholder="弹幕发送">
+					    <span class="send-btn">发送</span>
+					  </div> 
 					{% include '/module/review.html' %}
 
 					{% include '/module/footer.html' %}
 
 				</main>
+
 	</body>
+							<script src="/files/src/js/danmu.js"></script>
 </html>
