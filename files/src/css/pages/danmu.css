@@ -27,11 +27,11 @@
         user-select: none;
     }
     .barrage-item{
-        position:absolute;
-        top:0;
-        left: 100%;
+		position: absolute;
         white-space: nowrap;
         cursor: pointer;
+		top: 0px;
+		left: 100%;
         color:#fff;
     }
     .barrage-item .barrage-tip{

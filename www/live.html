@@ -7,6 +7,7 @@
 <html>
 
 	<head>
+		<meta http-equiv="Access-Control-Allow-Origin" content="*">
 		<meta charset="utf-8" lang="zh-cn">
 		<!-- 使IE在最高版本下渲染，国产浏览器用Chrome内核渲染 -->
 		<meta name="renderer" content="webkit" />
@@ -38,6 +39,7 @@
 		<!-- <script src="/files/src/lib/jquery.danmu.js"></script> -->
 		<script src="/files/src/util/growl.js"></script>
 		<script src="/files/src/util/checkandresize.js"></script>
+		<script type="text/javascript" src="https://cdn.bootcss.com/socket.io/3.0.0-rc4/socket.io.min.js"></script>
 		<!--<script src="/files/src/util/danmu.js"></script>-->
 		<script src="/files/src/js/live.js"></script>
 	</head>
@@ -58,37 +60,38 @@
 							<!-- 基本上达到了bilibili网页版的水平 -->
 							<video x5-video-player-type="h5-page" webkit-playsinline="true" playsinline="true" x-webkit-airplay="true" id="video"
 							 class="video-js vjs-big-play-centered vjs-fluid">
-							 </video>
-							 <div class="box">
-							    <div class="barrage-container-wrap clearfix">
-							     <div class="barrage-container">
-							     </div> 
-							   </div>
+							</video>
 						</div>
-					</div>
+						<div class="box">
+							<div class="barrage-container-wrap clearfix">
+								<div class="barrage-container">
+								</div>
+							</div>
 
-					<div id="video-controller-container">
-						<div id="play" style="background-image: url('/files/src/img/control/pause.svg');" class="video-controller"></div>
-						<!-- TODO 开发弹幕设置 -->
-						<!--<div id="danmusettings" style="background-image: url('/files/src/img/danmu/settings.svg');visibility: hidden;"
+						</div>
+
+						<div id="video-controller-container">
+							<div id="play" style="background-image: url('/files/src/img/control/pause.svg');" class="video-controller"></div>
+							<!-- TODO 开发弹幕设置 -->
+							<!--<div id="danmusettings" style="background-image: url('/files/src/img/danmu/settings.svg');visibility: hidden;"
             class="video-controller">
         </div>
         <div id="danmuswitch" style="background-image: url('/files/src/img/danmu/on.svg')" class="video-controller"></div>
         -->
-						<div id="fullscreen" style="background-image: url('/files/src/img/control/fullscreen.svg');" class="video-controller">
+							<div id="fullscreen" style="background-image: url('/files/src/img/control/fullscreen.svg');" class="video-controller">
+							</div>
 						</div>
-					</div>
-					
-					  <div class="send-wrap">
-					    <input type="text" class="input" placeholder="弹幕发送">
-					    <span class="send-btn">发送</span>
-					  </div> 
-					{% include '/module/review.html' %}
 
-					{% include '/module/footer.html' %}
+						<div class="send-wrap">
+							<input type="text" class="input" placeholder="弹幕发送">
+							<span class="send-btn">发送</span>
+						</div>
+						{% include '/module/review.html' %}
+
+						{% include '/module/footer.html' %}
 
 				</main>
 
 	</body>
-							<script src="/files/src/js/danmu.js"></script>
+	<script src="/files/src/js/danmu.js"></script>
 </html>

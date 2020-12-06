@@ -1,70 +1,24 @@
+var barrageWidth;
+var barrageHeight;
+$(window).resize(function(){
+	barrageWidth = $(".barrage-container-wrap").width();
+	barrageHeight = $(".barrage-container-wrap").height();
+	});
 // 参考 https://blog.csdn.net/qq_32849999/article/details/81031234
 (function(){
-  var barrageArray = [
-          {
-            url: '用户头像',
-            text: '秋天爱美丽',
-            level: 10
-          },
-          {
-            url: '用户头像',
-            text: '今天很开心啊',
-            level: 10
-          },
-          {
-            url: '用户头像',
-            text: 'winter has come',
-            level: 10
-          },
-          {
-            url: '',
-            text: '土耳其现在形势',
-            level: 10
-          },
-          {
-            url: '',
-            text: '没事早点回家吃饭啊',
-            level: 10
-          },
-           {
-            url: '',
-            text: '这主角真实醉了，不会回啊',
-            level: 10
-          },
-          {
-            url: '',
-            text: '背景音乐真好听啊',
-            level: 10
-          },
-          {
-            url: '',
-            text: '背景音乐是***',
-            level: 10
-          },
-          {
-            url: '',
-            text: '经费在燃烧啊',
-            level: 10
-          },
-          {
-            url: '',
-            text: '国产良心剧',
-            level: 10
-          },
-      ];
   var barrageColorArray = [
-    '#0099CC','#333333', '#009966','#FFFF66','#9933FF','#FFFF99','#CCCCFF','#CC9933','#FFFF66'
+    '#fff'
   ];
   var barrageTipWidth = 50; //提示语的长度
- 
-  var barrageBoxWrap = document.querySelector('.barrage-container-wrap');;
+var videoHeigh =  ~~window.getComputedStyle(document.querySelector("#video-container")).width.replace('px','');
+  var barrageBoxWrap = document.querySelector('.barrage-container-wrap');
   var barrageBox = document.querySelector('.barrage-container');
   var inputBox = document.querySelector('.input');
   var sendBtn = document.querySelector('.send-btn');
- 
+  
   //容器的宽高度
-  var barrageWidth = ~~window.getComputedStyle(barrageBoxWrap).width.replace('px','');
-  var barrageHeight = ~~window.getComputedStyle(barrageBoxWrap).height.replace('px','');
+  barrageWidth = $(".barrage-container-wrap").width();
+  barrageHeight = $(".barrage-container-wrap").height();
  
   //发送
   function sendMsg(){
@@ -95,10 +49,10 @@
     spanNode.classList.add('barrage-tip');
     divNode.appendChild(spanNode);
  
-    barrageOffsetLeft = getRandom(barrageWidth, barrageWidth*2);
+    var barrageOffsetLeft = getRandom(barrageWidth, barrageWidth*2);
     barrageOffsetLeft = isSendMsg ? barrageWidth : barrageOffsetLeft
-    barrageOffsetTop = getRandom(10, barrageHeight-10);
-    barrageColor = barrageColorArray[Math.floor(Math.random()*(barrageColorArray.length))];
+    var barrageOffsetTop = (getRandom(0, barrageHeight) - 10)/4;
+    var barrageColor = barrageColorArray[Math.floor(Math.random()*(barrageColorArray.length))];
  
     //执行初始化滚动
     initBarrage.call(divNode,{
@@ -171,16 +125,11 @@
  
   //随机获取高度
   function getRandom(start, end){
-    return start +(Math.random() * (end - start));
+    return (Math.random() * (end - start + 1) + start);
   }
  
  
-  /*******初始化事件**********/
-  //系统数据
-  barrageArray.forEach(function(item,index){
-    createBarrage(item.text, false);
-  });
- 
+  /*******初始化事件**********/ 
   //点击发送
   sendBtn.onclick = sendMsg;   //点击发送
  
@@ -222,3 +171,23 @@
     }
 
 }());
+// 结束
+
+$(document).ready(function() {
+        var namespace = '/new_danmu';
+		var port = "554";
+        var socket = io.connect('http://' + document.domain + ':' + port  + namespace);
+ 
+        socket.on('danmu', function(res) {
+            //res表示接收的数据，这里做数据的处理
+			createBarrage(res,true);
+        });
+		socket.on('feedback', function(res) {
+		    //res表示接收的数据，这里做数据的处理
+			if(res == "Connected"){
+				console.info("成功连接弹幕服务器")
+			}
+		});
+		 
+ 
+    });

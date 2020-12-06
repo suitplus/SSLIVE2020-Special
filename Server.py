@@ -1,10 +1,17 @@
 import threading
-from Main import setup
 import config
+from Main import setup
 from flask import Flask, request
+from flask_socketio import SocketIO, emit
+from gevent.pywsgi import WSGIServer
+from flask_cors import CORS, cross_origin
+
+from danmuServer import SocketStart
 
 app = Flask(__name__)
 inLive = 0
+CORS(app, resources={r"/*": {"origins": "*"}})
+app.config['SECRET_KEY'] = "SECKEY"
 
 
 @app.route('/', methods=['POST'])
@@ -29,13 +36,12 @@ def Server():
             return "4"
 
 
-def start():
-    print("协同服务端启动在127.0.0.1:", config.LiveStatePort)
-    app.run(host="127.0.0.1", port=config.LiveStatePort)
-
-
-if __name__ == "__main__":
-    t = threading.Thread(target=start)
-    t.start()
-    t1 = threading.Thread(target=setup)
-    t1.start()
+if __name__ == '__main__':
+    threading.Thread(target=setup).start()
+    threading.Thread(target=SocketStart).start()
+    print("协同服务端启动在", config.LiveStatePort)
+    http_server = WSGIServer(('127.0.0.1', config.LiveStatePort), app)
+    # certfile = "SSL/4837013_www.ssersay.cn.pem",
+    # keyfile = "SSL/4837013_www.ssersay.cn.key",
+    http_server.serve_forever()
+    # socketio.run(app, host=config.ip, port=config.LiveStatePort)

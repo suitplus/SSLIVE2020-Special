@@ -25,6 +25,7 @@ ip = "127.0.0.1"
 # port = [8080, 9090, 888, 99, 999, 8899, 8889, 9999]
 port = [90]
 LiveStatePort = 555
+Danmu_SocketPort = 554
 
 
 def md5(a):

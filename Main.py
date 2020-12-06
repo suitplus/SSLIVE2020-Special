@@ -2,9 +2,9 @@
 
 # gevent
 from gevent import monkey
+monkey.patch_all()
 from gevent.pywsgi import WSGIServer
 
-monkey.patch_all()
 from datetime import timedelta
 import config
 from flask_cache import Cache
@@ -13,20 +13,21 @@ import random
 import time
 import requests
 
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 # flask可参考: https://blog.csdn.net/qq_40832960/article/details/107132488
 cache = Cache()
 # Flask实例
 app = Flask(__name__, template_folder=config.root, static_folder=config.static_root,
             static_url_path=config.static_url_root)
-CORS(app)  # 如果要解决跨域就用这个
+CORS(app, resources={r"/*": {"origins": "*"}}) # 如果要解决跨域就用这个
 # 缓存初始化
 cache.init_app(app, config={'CACHE_TYPE': config.cache_type, 'CACHE_DEFAULT_TIMEOUT': config.cache_out_time})
 # 设置静态文件缓存时间
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(days=config.cache_time[0], hours=config.cache_time[1],
                                                     minutes=config.cache_time[2])
 app.config['threaded'] = True
+app.config['SECRET_KEY'] = "SECKEY"
 
 
 # 路径对应的执行函数，有路径就对应路径名，没路径就对应index
@@ -75,7 +76,7 @@ def IE():
 @cache.cached()
 def live():
     # 直播页面
-    return render_template('live.html')
+    return render_template('live.html', port=config.LiveStatePort)
 
 
 @app.route('/admin')
@@ -148,6 +149,7 @@ def login():
 def Check(a=0, user="Fnull", timel="Fnull"):
     # 验证token
     if a == 0:
+        token = ""
         if (user == "Fnull") and (timel == "Fnull"):
             user = request.cookies.get("user", default="null", type=str)
             timel = request.cookies.get("time", default="null", type=str)
@@ -186,7 +188,7 @@ def Check(a=0, user="Fnull", timel="Fnull"):
 import threading
 
 
-def start(ip, port):
+def startEach(ip, port):
     https_server = WSGIServer((ip, port), app, certfile="SSL/4837013_www.ssersay.cn.pem",
                               keyfile="SSL/4837013_www.ssersay.cn.key", spawn=200)
     print("https server start")
@@ -203,7 +205,7 @@ def GetLiveState():
 def ChangeLiveState():
     url = "http://127.0.0.1:" + str(config.LiveStatePort)
     data = {"type": "C"}
-    r = requests.post(url=url, data=data)
+    requests.post(url=url, data=data)
     return ""
 
 
@@ -219,7 +221,7 @@ def setup():
     # http_server = WSGIServer((config.ip, 80), dapp)
     # http_server.serve_forever()
     for port in config.port:
-        t = threading.Thread(target=start, args=(config.ip, port))
+        t = threading.Thread(target=startEach, args=(config.ip, port))
         t.start()
         print("Server start in ", config.ip, ":", port)
     print("all server start")
