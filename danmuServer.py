@@ -13,8 +13,9 @@ socketio = SocketIO(socketApp, cors_allowed_origins='*')
 
 
 @socketio.on('connect', namespace='/new_danmu')
-def danmu_connect():
+def danmu_connect(msg):
     # return false # 不予连接
+    print(msg)
     emit('feedback', {'data': 'Connected'})
 
 
@@ -24,7 +25,7 @@ def danmu_connect():
 #     print('Client disconnected')
 
 
-@socketio.on('my event', namespace="/new_danmu")
+@socketio.on('my_event', namespace="/new_danmu")
 def send_danmu(text):
     emit('danmu', text, broadcast=True)
 

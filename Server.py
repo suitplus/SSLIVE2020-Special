@@ -41,7 +41,5 @@ if __name__ == '__main__':
     threading.Thread(target=SocketStart).start()
     print("协同服务端启动在", config.LiveStatePort)
     http_server = WSGIServer(('127.0.0.1', config.LiveStatePort), app)
-    # certfile = "SSL/4837013_www.ssersay.cn.pem",
-    # keyfile = "SSL/4837013_www.ssersay.cn.key",
     http_server.serve_forever()
     # socketio.run(app, host=config.ip, port=config.LiveStatePort)
