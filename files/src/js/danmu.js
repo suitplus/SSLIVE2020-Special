@@ -179,7 +179,7 @@ function newDanmu() {
 // 结束
 var socket;
 $(document).ready(function() {
-	socket = io('ws://' + document.domain + ':' + DanmuPort, {
+	socket = io('//' + document.domain + ':' + DanmuPort, {
 		// path: '/socket.io/new_danmu',
 		transports: ['websocket']
 	});
