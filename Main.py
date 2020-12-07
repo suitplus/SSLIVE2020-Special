@@ -78,7 +78,7 @@ def IE():
 @cache.cached()
 def live():
     # 直播页面
-    return render_template('live.html', port=config.LiveStatePort)
+    return render_template('live.html', port=config.LiveStatePort, DanmuPort=config.Danmu_showPort)
 
 
 @app.route('/admin')
