@@ -5,143 +5,148 @@ $(window).resize(function() {
 	barrageHeight = $(".barrage-container-wrap").height();
 });
 // 参考 https://blog.csdn.net/qq_32849999/article/details/81031234
-(function() {
-	var barrageColorArray = [
-		'#fff'
-	];
-	var barrageTipWidth = 50; //提示语的长度
-	var videoHeigh = ~~window.getComputedStyle(document.querySelector("#video-container")).width.replace('px', '');
-	var barrageBoxWrap = document.querySelector('.barrage-container-wrap');
-	var barrageBox = document.querySelector('.barrage-container');
-	var inputBox = document.querySelector('.input');
-	var sendBtn = document.querySelector('.send-btn');
+var barrageColorArray = [
+	'#fff'
+];
+var barrageTipWidth = 50; //提示语的长度
+var videoHeigh = ~~window.getComputedStyle(document.querySelector("#video-container")).width.replace('px', '');
+var barrageBoxWrap = document.querySelector('.barrage-container-wrap');
+var barrageBox = document.querySelector('.barrage-container');
+var inputBox = document.querySelector('.input');
+var sendBtn = document.querySelector('.send-btn');
 
-	//容器的宽高度
-	barrageWidth = $(".barrage-container-wrap").width();
-	barrageHeight = $(".barrage-container-wrap").height();
+//容器的宽高度
+barrageWidth = $(".barrage-container-wrap").width();
+barrageHeight = $(".barrage-container-wrap").height();
 
-	//发送
-	function sendMsg() {
-		var inputValue = inputBox.value;
-		inputValue.replace(/\ +/g, "");
+//发送
+function sendMsg() {
+	var inputValue = inputBox.value;
+	inputValue.replace(/\ +/g, "");
 
-		if (inputValue.length <= 0) {
-			alert('请输入');
-			return false;
-		}
-
-		//生成弹幕
-		createBarrage(inputValue, true);
-		inputBox.value = '';
+	if (inputValue.length <= 0) {
+		alert('请输入');
+		return "Nullandnull";
 	}
 
+	return inputValue;
+}
 
-	//创建弹幕
-	function createBarrage(msg, isSendMsg) {
-		var divNode = document.createElement('div');
-		var spanNode = document.createElement('span');
 
-		divNode.innerHTML = msg;
-		divNode.classList.add('barrage-item');
-		barrageBox.appendChild(divNode);
+//创建弹幕
+function createBarrage(msg, isSendMsg) {
+	var divNode = document.createElement('div');
+	var spanNode = document.createElement('span');
 
-		spanNode.innerHTML = '举报';
-		spanNode.classList.add('barrage-tip');
-		divNode.appendChild(spanNode);
+	divNode.innerHTML = msg;
+	divNode.classList.add('barrage-item');
+	barrageBox.appendChild(divNode);
 
-		var barrageOffsetLeft = getRandom(barrageWidth, barrageWidth * 2);
-		barrageOffsetLeft = isSendMsg ? barrageWidth : barrageOffsetLeft
-		var barrageOffsetTop = (getRandom(0, barrageHeight) - 10) / 4;
-		var barrageColor = barrageColorArray[Math.floor(Math.random() * (barrageColorArray.length))];
+	spanNode.innerHTML = '举报';
+	spanNode.classList.add('barrage-tip');
+	divNode.appendChild(spanNode);
 
-		//执行初始化滚动
-		initBarrage.call(divNode, {
-			left: barrageOffsetLeft,
-			top: barrageOffsetTop,
-			color: barrageColor
+	var barrageOffsetLeft = getRandom(barrageWidth, barrageWidth * 2);
+	barrageOffsetLeft = isSendMsg ? barrageWidth : barrageOffsetLeft
+	var barrageOffsetTop = (getRandom(0, barrageHeight) - 10) / 4;
+	var barrageColor = barrageColorArray[Math.floor(Math.random() * (barrageColorArray.length))];
+
+	//执行初始化滚动
+	initBarrage.call(divNode, {
+		left: barrageOffsetLeft,
+		top: barrageOffsetTop,
+		color: barrageColor
+	});
+}
+
+//初始化弹幕移动(速度，延迟)
+function initBarrage(obj) {
+	//初始化
+	obj.top = obj.top || 0;
+	obj.class = obj.color || '#fff';
+	this.style.left = obj.left + 'px';
+	this.style.top = obj.top + 'px';
+	this.style.color = obj.color;
+
+	//添加属性
+	this.distance = 0;
+	this.width = ~~window.getComputedStyle(this).width.replace('px', '');
+	this.offsetLeft = obj.left;
+	this.timer = null;
+
+	//弹幕子节点
+	var barrageChileNode = this.children[0];
+	barrageChileNode.style.left = (this.width - barrageTipWidth) / 2 + 'px';
+
+	//运动
+	barrageAnimate(this);
+
+	//停止
+	this.onmouseenter = function() {
+		barrageChileNode.style.display = 'block';
+		cancelAnimationFrame(this.timer);
+	};
+
+	this.onmouseleave = function() {
+		barrageChileNode.style.display = 'none';
+		barrageAnimate(this);
+	};
+
+	//举报
+	barrageChileNode.onclick = function() {
+		alert('举报成功');
+	}
+}
+
+//弹幕动画
+function barrageAnimate(obj) {
+	move(obj);
+
+	if (Math.abs(obj.distance) < obj.width + obj.offsetLeft) {
+		obj.timer = requestAnimationFrame(function() {
+			barrageAnimate(obj);
+		});
+	} else {
+		cancelAnimationFrame(obj.timer);
+		//删除节点
+		obj.parentNode.removeChild(obj);
+	}
+}
+
+//移动
+function move(obj) {
+	obj.distance--;
+	obj.style.transform = 'translateX(' + obj.distance + 'px)';
+	obj.style.webkitTransform = 'translateX(' + obj.distance + 'px)';
+}
+
+//随机获取高度
+function getRandom(start, end) {
+	return (Math.random() * (end - start + 1) + start);
+}
+
+
+/*******初始化事件**********/
+//点击发送
+sendBtn.onclick = newDanmu; //点击发送
+
+//回车
+inputBox.onkeydown = function(e) {
+	e = e || window.event;
+	if (e.keyCode == 13) {
+		newDanmu();
+	}
+}
+
+function newDanmu() {
+	r = sendMsg();
+	if (r != "nullandnull") {
+		inputBox.value = '';
+		socket.emit("new_danmu", {
+			"text": r
 		});
 	}
-
-	//初始化弹幕移动(速度，延迟)
-	function initBarrage(obj) {
-		//初始化
-		obj.top = obj.top || 0;
-		obj.class = obj.color || '#fff';
-		this.style.left = obj.left + 'px';
-		this.style.top = obj.top + 'px';
-		this.style.color = obj.color;
-
-		//添加属性
-		this.distance = 0;
-		this.width = ~~window.getComputedStyle(this).width.replace('px', '');
-		this.offsetLeft = obj.left;
-		this.timer = null;
-
-		//弹幕子节点
-		var barrageChileNode = this.children[0];
-		barrageChileNode.style.left = (this.width - barrageTipWidth) / 2 + 'px';
-
-		//运动
-		barrageAnimate(this);
-
-		//停止
-		this.onmouseenter = function() {
-			barrageChileNode.style.display = 'block';
-			cancelAnimationFrame(this.timer);
-		};
-
-		this.onmouseleave = function() {
-			barrageChileNode.style.display = 'none';
-			barrageAnimate(this);
-		};
-
-		//举报
-		barrageChileNode.onclick = function() {
-			alert('举报成功');
-		}
-	}
-
-	//弹幕动画
-	function barrageAnimate(obj) {
-		move(obj);
-
-		if (Math.abs(obj.distance) < obj.width + obj.offsetLeft) {
-			obj.timer = requestAnimationFrame(function() {
-				barrageAnimate(obj);
-			});
-		} else {
-			cancelAnimationFrame(obj.timer);
-			//删除节点
-			obj.parentNode.removeChild(obj);
-		}
-	}
-
-	//移动
-	function move(obj) {
-		obj.distance--;
-		obj.style.transform = 'translateX(' + obj.distance + 'px)';
-		obj.style.webkitTransform = 'translateX(' + obj.distance + 'px)';
-	}
-
-	//随机获取高度
-	function getRandom(start, end) {
-		return (Math.random() * (end - start + 1) + start);
-	}
-
-
-	/*******初始化事件**********/
-	//点击发送
-	sendBtn.onclick = sendMsg; //点击发送
-
-	//回车
-	inputBox.onkeydown = function(e) {
-		e = e || window.event;
-		if (e.keyCode == 13) {
-			sendMsg();
-		}
-	}
-
-})();
+}
 
 //兼容写法
 (function() {
@@ -172,37 +177,20 @@ $(window).resize(function() {
 
 }());
 // 结束
-
+var socket;
 $(document).ready(function() {
-	// var namespace = "/new_danmu";
-	// var port = "554";
-	// var socket = io("http://" + document.domain + ':' + port + namespace);
-	// socket.on('connect', function() {
-	// 	socket.emit('my_event', {
-	// 		data: 'I\'m connected!',
-	// 	});
-	// });
-	// //       socket.on('danmu', function(res) {
-	// //           //res表示接收的数据，这里做数据的处理
-	// // 	createBarrage(res,true);
-	// //       });
-	// socket.on('feedback', function(res) {
-	// 	//res表示接收的数据，这里做数据的处理
-	// 	if (res == "Connected") {
-	// 		console.info("成功连接弹幕服务器")
-	// 	}
-	// });
-	// cross origin version
-	const socket = io('http://' + document.domain + ':554', {
-		path: '/socket.io/new_danmu',
-		reconnection: true,
-		reconnectionAttempts: Infinity,
-		reconnectionDelay: 1000,
-		reconnectionDelayMax: 5000,
-		randomizationFactor: 0.5,
-		timeout: 20000,
-		autoConnect: true,
-		query: {}
+	socket = io('//' + document.domain + ':553', {
+		// path: '/socket.io/new_danmu',
+		transports: ['websocket']
+	});
+	socket.on('connect', function() {
+		console.info("连接弹幕服务器成功")
+	});
+	socket.on('danmu', function(res) {
+		//res表示接收的数据，这里做数据的处理
+		createBarrage(res, true);
+		//生成弹幕
+
 	});
 
 });

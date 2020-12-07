@@ -3,9 +3,7 @@ import config
 from Main import setup
 from flask import Flask, request
 from gevent.pywsgi import WSGIServer
-from flask_cors import CORS, cross_origin
-
-from danmu import socket
+from flask_cors import CORS
 from danmuServer import SocketStart
 
 app = Flask(__name__)
@@ -47,6 +45,6 @@ if __name__ == '__main__':
     t1.start()
     t3 = threading.Thread(target=start)
     t3.start()
-    t2 = threading.Thread(target=socket)
+    t2 = threading.Thread(target=SocketStart)
     t2.start()
     # socketio.run(app, host=config.ip, port=config.LiveStatePort)

@@ -1,33 +1,33 @@
 import logging
-
 import config
-from flask import Flask, request
+from flask import Flask
 from flask_socketio import SocketIO, emit
-from flask_cors import CORS
 
 socketApp = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
-CORS(socketApp, resources={r"/*": {"origins": "*"}})
 socketApp.config['SECRET_KEY'] = "SECKEY"
-socketio = SocketIO(socketApp, cors_allowed_origins=['https://' + str(config.ip) + ':' + str(p) for p in config.port])
+socketio = SocketIO(socketApp, cors_allowed_origins='*', async_mode="gevent")
 
 
-@socketio.on('connect', namespace='/new_danmu')
-def danmu_connect(msg):
-    # return false # 不予连接
-    print(msg)
-    emit('feedback', {'data': 'Connected'})
+@socketio.on('new_danmu')
+def adding(data):
+    r = data.get("text")
+    if r == "null-999Null":
+        return "fail"
+    else:
+        print("新建弹幕", r)
+        socketio.emit("danmu", str(r), broadcast=True)
 
 
-# 断开连接事件
-# @socketio.on('disconnect', namespace='/new_damu')
-# def danmu_disconnect():
-#     print('Client disconnected')
+@socketio.on('connect')
+def test_connect():
+    emit('my response', {'data': 'Connected'})
+    print("连接成功")
 
 
-@socketio.on('my_event', namespace="/new_danmu")
-def send_danmu(text):
-    emit('danmu', text, broadcast=True)
+@socketio.on('disconnect')
+def test_disconnect():
+    print('Client disconnected')
 
 
 @socketApp.route('/', methods=["GET"])
@@ -35,16 +35,11 @@ def index():
     return "SSLIVE弹幕模块"
 
 
-@socketApp.route("/addingdanmu", methods=["POST"])
-def adding():
-    r = request.args.get("danmutext", default="null-999Null")
-    if r == "null-999Null":
-        return "fail"
-    else:
-        send_danmu(r)
-
 
 def SocketStart():
     print("弹幕服务器启动在", config.ip, ':', config.Danmu_SocketPort)
-    # socketio.run(socketApp, config.ip, config.Danmu_SocketPort)
-
+    # https_server = WSGIServer((config.ip, config.Danmu_SocketPort), socketApp, certfile="SSL/4837013_www.ssersay.cn.pem",
+    #                           keyfile="SSL/4837013_www.ssersay.cn.key", spawn=200)
+    # https_server.serve_forever()
+    socketio.run(app=socketApp, host=config.ip, port=config.Danmu_SocketPort,
+                 certfile="SSL/4837013_www.ssersay.cn.pem", keyfile="SSL/4837013_www.ssersay.cn.key")
