@@ -2,10 +2,10 @@ import threading
 import config
 from Main import setup
 from flask import Flask, request
-from flask_socketio import SocketIO, emit
 from gevent.pywsgi import WSGIServer
 from flask_cors import CORS, cross_origin
 
+from danmu import socket
 from danmuServer import SocketStart
 
 app = Flask(__name__)
@@ -36,10 +36,17 @@ def Server():
             return "4"
 
 
-if __name__ == '__main__':
-    threading.Thread(target=setup).start()
-    threading.Thread(target=SocketStart).start()
+def start():
     print("协同服务端启动在", config.LiveStatePort)
     http_server = WSGIServer(('127.0.0.1', config.LiveStatePort), app)
     http_server.serve_forever()
+
+
+if __name__ == '__main__':
+    t1 = threading.Thread(target=setup)
+    t1.start()
+    t3 = threading.Thread(target=start)
+    t3.start()
+    t2 = threading.Thread(target=socket)
+    t2.start()
     # socketio.run(app, host=config.ip, port=config.LiveStatePort)

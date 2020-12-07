@@ -2,6 +2,7 @@
 
 # gevent
 from gevent import monkey
+
 monkey.patch_all()
 from gevent.pywsgi import WSGIServer
 
@@ -20,7 +21,7 @@ cache = Cache()
 # Flask实例
 app = Flask(__name__, template_folder=config.root, static_folder=config.static_root,
             static_url_path=config.static_url_root)
-CORS(app, resources={r"/*": {"origins": "*"}}) # 如果要解决跨域就用这个
+CORS(app, resources={r"/*": {"origins": "*"}})  # 如果要解决跨域就用这个
 # 缓存初始化
 cache.init_app(app, config={'CACHE_TYPE': config.cache_type, 'CACHE_DEFAULT_TIMEOUT': config.cache_out_time})
 # 设置静态文件缓存时间
@@ -73,6 +74,7 @@ def IE():
 
 # 下面两行调试的时候加，非调试在正式情况下最好去掉
 @app.route('/live')
+@cross_origin()
 @cache.cached()
 def live():
     # 直播页面

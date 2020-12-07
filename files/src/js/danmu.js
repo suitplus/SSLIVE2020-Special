@@ -174,24 +174,35 @@ $(window).resize(function() {
 // 结束
 
 $(document).ready(function() {
-	var namespace = "/new_danmu";
-	var port = "554";
-	var socket = io('http://' + document.domain + ':' + port + namespace);
-	socket.on('connect', function() {
-		socket.emit('my_event', {
-			data: 'I\'m connected!',
-		});
+	// var namespace = "/new_danmu";
+	// var port = "554";
+	// var socket = io("http://" + document.domain + ':' + port + namespace);
+	// socket.on('connect', function() {
+	// 	socket.emit('my_event', {
+	// 		data: 'I\'m connected!',
+	// 	});
+	// });
+	// //       socket.on('danmu', function(res) {
+	// //           //res表示接收的数据，这里做数据的处理
+	// // 	createBarrage(res,true);
+	// //       });
+	// socket.on('feedback', function(res) {
+	// 	//res表示接收的数据，这里做数据的处理
+	// 	if (res == "Connected") {
+	// 		console.info("成功连接弹幕服务器")
+	// 	}
+	// });
+	// cross origin version
+	const socket = io('http://' + document.domain + ':554', {
+		path: '/socket.io/new_danmu',
+		reconnection: true,
+		reconnectionAttempts: Infinity,
+		reconnectionDelay: 1000,
+		reconnectionDelayMax: 5000,
+		randomizationFactor: 0.5,
+		timeout: 20000,
+		autoConnect: true,
+		query: {}
 	});
-	//       socket.on('danmu', function(res) {
-	//           //res表示接收的数据，这里做数据的处理
-	// 	createBarrage(res,true);
-	//       });
-	socket.on('feedback', function(res) {
-		//res表示接收的数据，这里做数据的处理
-		if (res == "Connected") {
-			console.info("成功连接弹幕服务器")
-		}
-	});
-
 
 });
