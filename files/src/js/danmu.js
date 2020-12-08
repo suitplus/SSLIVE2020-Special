@@ -179,6 +179,7 @@ function newDanmu() {
 // 结束
 var socket;
 $(document).ready(function() {
+	//必须要wss
 	socket = io('//' + document.domain + ':' + DanmuPort, {
 		// path: '/socket.io/new_danmu',
 		transports: ['websocket']
