@@ -19,6 +19,11 @@ All the source code in this repository (EXCEPT FOR the code in mdl, src/lib/ and
 所有的代码（除了 src/lib/, console/lib/以及mdl 文件夹里的代码）都由广东实验中学学生会信息部编写。
 
 ---
+**可能的bugs的解决方法**
+
+flask_cache cannot import 'import_string' -  https://www.cnblogs.com/gavinclc/p/9622095.html
+
+--
 **contributor list:**
 
 前端贡献者名单:
