@@ -33,4 +33,13 @@ flask_socketio 报错 unsupport client - 把前端js引用的socket.io.js从3.* 
 前端贡献者名单:
 
 1. Lin Sixing ([@LSX-s-Software](https://github.com/LSX-s-Software))
-2. Zeng
+2. Zeng Wenyi ([@vincenttsang](https://github.com/vincenttsang))
+3. Zeng Chengzhi
+4. Wu Kai ([@wk2003](https://github.com/wk2003))
+5. Jia Boyi ([@ap0stader](https://github.com/ap0stader))
+6. Qiu Yiran ([@Nambers](https://github.com/Nambers))
+7. Chen Qixuan ([@Asiimoviet](https://github.com/Asiimoviet))
+
+后端贡献者名单:
+
+1. Qiu Yiran ([@Namebers](https://github.com/Nambers))
