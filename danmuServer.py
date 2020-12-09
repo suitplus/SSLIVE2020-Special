@@ -6,13 +6,12 @@ import time
 
 
 class SingleDanmu:
+    value = ""
+    time = 0
+
     def __init__(self, value):
         self.value = value
         self.time = int(round(time.time() * 1000))
-
-    def verify(self):
-        # todo 验证弹幕是否可发布
-        return True
 
 
 socketApp = Flask(__name__)
@@ -50,6 +49,7 @@ def test_connect():
 @socketio.on('disconnect')
 def disconnect():
     global OnlineWatchers
+    # 连接断开
     OnlineWatchers -= 1
     changingInwatcher()
 

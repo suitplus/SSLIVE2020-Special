@@ -141,6 +141,7 @@ inputBox.onkeydown = function(e) {
 function newDanmu() {
 	r = sendMsg();
 	if (r != "nullandnull") {
+		// todo 弹幕验证，去除黄暴信息
 		inputBox.value = '';
 		socket.emit("new_danmu", {
 			"text": r
@@ -185,7 +186,7 @@ $(document).ready(function() {
 		transports: ['websocket']
 	});
 	socket.on('watchersNum', function (res) {
-			// res是在线人数
+			// res的值是在线人数，动态改变
 	})
 	socket.on('connect', function() {
 		console.info("连接弹幕服务器成功")
