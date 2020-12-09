@@ -184,6 +184,9 @@ $(document).ready(function() {
 		// path: '/socket.io/new_danmu',
 		transports: ['websocket']
 	});
+	socket.on('watchersNum', function (res) {
+			// res是在线人数
+	})
 	socket.on('connect', function() {
 		console.info("连接弹幕服务器成功")
 	});
@@ -191,7 +194,6 @@ $(document).ready(function() {
 		//res表示接收的数据，这里做数据的处理
 		createBarrage(res, true);
 		//生成弹幕
-
 	});
 
 });

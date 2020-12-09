@@ -3,6 +3,8 @@
 # gevent
 from gevent import monkey
 
+import danmuServer
+
 monkey.patch_all()
 from gevent.pywsgi import WSGIServer
 
@@ -78,7 +80,8 @@ def IE():
 @cache.cached()
 def live():
     # 直播页面
-    return render_template('live.html', port=config.LiveStatePort, DanmuPort=config.Danmu_showPort)
+    return render_template('live.html', port=config.LiveStatePort, DanmuPort=config.Danmu_showPort,
+                           danmuNum=str(len(danmuServer.danmuList)))
 
 
 @app.route('/admin')

@@ -2,32 +2,56 @@ import logging
 import config
 from flask import Flask
 from flask_socketio import SocketIO, emit
+import time
+
+
+class SingleDanmu:
+    def __init__(self, value):
+        self.value = value
+        self.time = int(round(time.time() * 1000))
+
+    def verify(self):
+        # todo 验证弹幕是否可发布
+        return True
+
 
 socketApp = Flask(__name__)
-logging.basicConfig(level=logging.DEBUG)
 socketApp.config['SECRET_KEY'] = "SECKEY"
 socketio = SocketIO(socketApp, cors_allowed_origins='*', async_mode="gevent")
+danmuList = []
+OnlineWatchers = 0
 
 
 @socketio.on('new_danmu')
 def adding(data):
+    global OnlineWatchers
     r = data.get("text")
     if r == "null-999Null":
         return "fail"
     else:
         print("新建弹幕", r)
-        socketio.emit("danmu", str(r), broadcast=True)
+        # 加入历史弹幕集
+        danmuList.append(SingleDanmu(str(r)))
+        emit("danmu", str(r), broadcast=True)
+
+
+def changingInwatcher():
+    emit('watchersNum', str(OnlineWatchers))
 
 
 @socketio.on('connect')
 def test_connect():
-    emit('my response', {'data': 'Connected'})
-    print("连接成功")
+    global OnlineWatchers
+    # 连接成功，在线人数+1
+    OnlineWatchers += 1
+    changingInwatcher()
 
 
 @socketio.on('disconnect')
-def test_disconnect():
-    print('Client disconnected')
+def disconnect():
+    global OnlineWatchers
+    OnlineWatchers -= 1
+    changingInwatcher()
 
 
 @socketApp.route('/', methods=["GET"])
