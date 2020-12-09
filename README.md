@@ -24,6 +24,8 @@ All the source code in this repository (EXCEPT FOR the code in mdl, src/lib/ and
 
 flask_cache cannot import 'import_string' -  https://www.cnblogs.com/gavinclc/p/9622095.html
 
+flask_socketio 报错 unsupport client - 把前端js引用的socket.io.js从3.* 改成2.* 的版本
+
 ---
 
 **contributor list:**
