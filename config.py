@@ -23,8 +23,11 @@ cache_type = "simple"
 ip = "127.0.0.1"
 # 映射端口,和nginx的反向代理相同
 port = [8080, 9090, 888, 99, 999, 8899, 8889, 9999]
+# 协同服务器端口s
 LiveStatePort = 555
-Danmu_SocketPort = 553
+# 弹幕服务器启动端口
+Danmu_SocketPort = 90
+# 弹幕服务器外显端口
 Danmu_showPort = 90
 
 

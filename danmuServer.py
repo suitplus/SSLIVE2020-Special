@@ -35,11 +35,11 @@ def index():
     return "SSLIVE弹幕模块"
 
 
-
 def SocketStart():
     print("弹幕服务器启动在", config.ip, ':', config.Danmu_SocketPort)
     # https_server = WSGIServer((config.ip, config.Danmu_SocketPort), socketApp, certfile="SSL/4837013_www.ssersay.cn.pem",
     #                           keyfile="SSL/4837013_www.ssersay.cn.key", spawn=200)
     # https_server.serve_forever()
-    socketio.run(app=socketApp, host=config.ip, port=config.Danmu_SocketPort,
+    # 直接面向外网
+    socketio.run(app=socketApp, host="0.0.0.0", port=config.Danmu_SocketPort,
                  certfile="SSL/4837013_www.ssersay.cn.pem", keyfile="SSL/4837013_www.ssersay.cn.key")
