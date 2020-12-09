@@ -19,23 +19,16 @@ All the source code in this repository (EXCEPT FOR the code in mdl, src/lib/ and
 所有的代码（除了 src/lib/, console/lib/以及mdl 文件夹里的代码）都由广东实验中学学生会信息部编写。
 
 ---
+
 **可能的bugs的解决方法**
 
 flask_cache cannot import 'import_string' -  https://www.cnblogs.com/gavinclc/p/9622095.html
 
 --
+
 **contributor list:**
 
 前端贡献者名单:
 
 1. Lin Sixing ([@LSX-s-Software](https://github.com/LSX-s-Software))
-2. Zeng Wenyi ([@vincenttsang](https://github.com/vincenttsang))
-3. Zeng Chengzhi
-4. Wu Kai ([@wk2003](https://github.com/wk2003))
-5. Jia Boyi ([@ap0stader](https://github.com/ap0stader))
-6. Qiu Yiran ([@Nambers](https://github.com/Nambers))
-7. Chen Qixuan ([@Asiimoviet](https://github.com/Asiimoviet))
-
-后端贡献者名单:
-
-1. Qiu Yiran ([@Namebers](https://github.com/Nambers))
+2. Zeng
