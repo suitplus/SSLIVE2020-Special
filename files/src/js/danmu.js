@@ -192,12 +192,12 @@ function newDanmu() {
 	}
 
 }());
+// 结束
 function danmu(id, data) {
 	this.id = id;
 	this.data = data;
 	this.time = (new Date()).valueOf();
 }
-// 结束
 var socket;
 $(document).ready(function() {
 	//必须要wss

@@ -16,7 +16,16 @@ function logOut() {
 	});
 	location.reload();
 }
-
+function clear_cache(){
+	$.ajax({
+		url: "/cache_clear",
+		method: "GET",
+		data: {},
+		success: function(data) {
+			$("#cache_tip").text("成功");
+		}
+	});
+}
 function changelive() {
 	$.ajax({
 		url: "/livestart",

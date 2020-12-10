@@ -36,7 +36,8 @@ function htmlSpecialChars(str)
 document.onkeydown = function() {
 	//回车提交
 	if (event.keyCode == 13) {
-		$('#bu').click();
+		// $('#bu').click();
+		submita();
 	}
 }
 

@@ -152,7 +152,11 @@ def login():
 @app.route("/admin/danmu", methods=["GET"])
 def danmuMange():
     # TODO 弹幕管理界面
-    return False
+    if Check():
+        return render_template("DanmuManager.html", DanmuPort=config.Danmu_showPort)
+    else:
+        return "502<br/><b>请先登录</b><br/><a href=\"\\admin\">登录页面</a>"
+
 
 def Check(a=0, user="Fnull", timel="Fnull"):
     # 验证token

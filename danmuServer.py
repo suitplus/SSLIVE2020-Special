@@ -89,7 +89,7 @@ def changingInwatcher():
 
 
 @socketio.on('connect')
-def test_connect():
+def connect():
     global OnlineWatchers
     # 连接成功，在线人数+1
     OnlineWatchers += 1
@@ -102,6 +102,36 @@ def disconnect():
     # 连接断开
     OnlineWatchers -= 1
     changingInwatcher()
+
+
+@socketio.on('connect', namespace="Adm")
+def Mconnect():
+    if Main.Check():
+        print("管理员登录")
+    else:
+        ConnectionRefusedError('authentication failed')
+
+
+@socketio.on('ban', namespace="Adm")
+def Mban(data):
+    # toekn合法即有权限
+    # data 应该是 {'data': ip或弹幕id, 'type': '1'=弹幕id '2'=ip}
+    d = data.get("data")
+    t = data.get("ip")
+    if t == "1":
+        for mess in danmuList:
+            if mess.id == d:
+                print("封禁ip", mess.senderIp)
+                b = ban(mess.senderIp)
+                blackList.append(b)
+    if t == "2":
+        b = ban(d)
+        blackList.append(b)
+
+
+@socketio.on('disconnect', namespace="Adm")
+def Mdisconnect():
+    print("管理员接入")
 
 
 @socketApp.route('/', methods=["GET"])

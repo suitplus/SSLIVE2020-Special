@@ -43,3 +43,106 @@ flask_socketio 报错 unsupport client - 把前端js引用的socket.io.js从3.* 
 后端贡献者名单:
 
 1. Qiu Yiran ([@Namebers](https://github.com/Nambers))
+
+---
+
+项目树状目录
+
+```
+│  config.py flask一部分配置文件
+│  danmuServer.py 弹幕服务器文件
+│  Main.py 主要flask启动文件
+│  README.md
+│  Server.py 协同服务器启动文件，也是整个项目启动文件
+│  
+│        
+├─files 静态文件目录，url访问网址是'/files/'，在flask中设置
+│  ├─config
+│  │  └─coding
+│  │          livestart.json 直播开始时间
+│  │          livestop.json 直播停止时间
+│  │          
+│  ├─console
+│  │  │  console.css 后端控制台主要css
+│  │  │  console.js 后端控制台主要js
+│  │  │  jquery.cookie.js jq的cookie库
+│  │  │  
+│  │  └─login
+│  │      │  jquery.md5.js jq的md5加密库
+│  │      │  
+│  │      ├─css
+│  │      │      loading.css 加载中动画css
+│  │      │      main.css 登录页面主要css
+│  │      │      
+│  │      └─js 登录页面的js
+│  │              
+│  ├─mdl 应该是google的模块
+│  │      
+│  └─src
+│      ├─css
+│      │  ├─module 模块的css文件
+│      │  │      
+│      │  └─pages 每个页面独立的css文件
+│      │          
+│      ├─img
+│      │  ├─about 关于我们页面里的图片
+│      │  │      
+│      │  ├─background 背景图
+│      │  │      
+│      │  ├─control 视频控制按钮图
+│      │  │      
+│      │  ├─growl
+│      │  │      
+│      │  ├─linence 授权页面里的商标图
+│      │  │      
+│      │  ├─logo logo图片
+│      │  │      
+│      │  └─textture
+│      │          
+│      ├─js 每个页面独立的js文件
+│      │      
+│      ├─lib 一些引用的第三方js文件
+│      │      
+│      └─util 一些杂七杂八的js文件
+│              
+├─SSL SSL证书
+│      
+├─Win
+│  │  启动nginx.bat
+│  │  启动脚本.bat
+│  │  
+│  └─nginx-1.18.0
+│      │  nginx.exe nginx启动文件，常用命令(start nginx, nginx -s reload, nginx -s quit)
+│      │  
+│      ├─conf nginx配置文件
+│      │      
+│      ├─contrib nginx资源
+│      │              
+│      ├─docs nginx文档
+│      │      
+│      ├─html 默认文件
+│      │      
+│      ├─logs 日志
+│      │      
+│      └─temp 缓存
+│              
+├─www
+│  │  about.html 关于我们html文件
+│  │  console.html 后端控制台html 文件
+│  │  DanmuManager.html 弹幕的控制台文件
+│  │  IE.html IE用户引流文件
+│  │  introduction.html 非直播状态下首页
+│  │  license.html 授权文件
+│  │  live.html 直播页面
+│  │  login.html 登录页面
+│  │  robots.txt 给机器人爬的
+│  │  
+│  └─module 模组html文件，flask用
+│          Baidu.html  百度统计
+│          footer.html 页脚
+│          guiding.html 头部
+│          guiding_intro.html 头部2，透明
+│          review.html 以前的直播内容卡
+│          
+└─__pycache__ flask页面缓存文件夹
+```
