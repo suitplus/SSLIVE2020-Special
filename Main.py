@@ -149,6 +149,11 @@ def login():
     return "你来了不该来的地方"
 
 
+@app.route("/admin/danmu", methods=["GET"])
+def danmuMange():
+    # TODO 弹幕管理界面
+    return False
+
 def Check(a=0, user="Fnull", timel="Fnull"):
     # 验证token
     if a == 0:

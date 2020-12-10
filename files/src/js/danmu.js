@@ -207,6 +207,7 @@ $(document).ready(function() {
 	});
 	socket.on('watchersNum', function(res) {
 		// res的值是在线人数，动态改变
+		$("#onlineW")[0].innerHTML = "在线人数: " + res;
 	})
 	socket.on('connect', function() {
 		console.info("连接弹幕服务器成功")

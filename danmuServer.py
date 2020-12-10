@@ -1,3 +1,4 @@
+# 官方文档 https://flask-socketio.readthedocs.io/en/latest/
 import Main
 import config
 from flask import Flask
@@ -40,7 +41,9 @@ idIndex = 0
 socketApp = Flask(__name__)
 socketApp.config['SECRET_KEY'] = "SECKEY"
 socketio = SocketIO(socketApp, cors_allowed_origins='*', async_mode="gevent")
+# 弹幕名单
 danmuList = []
+# 封禁ip名单
 blackList = []
 OnlineWatchers = 0
 
@@ -82,7 +85,7 @@ def ban(data):
 
 
 def changingInwatcher():
-    emit('watchersNum', str(OnlineWatchers))
+    emit('watchersNum', str(OnlineWatchers), broadcast=True)
 
 
 @socketio.on('connect')
