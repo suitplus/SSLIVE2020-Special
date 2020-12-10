@@ -8,6 +8,7 @@ $(window).resize(function() {
 var barrageColorArray = [
 	'#fff'
 ];
+var danmuArray = new Array();
 var barrageTipWidth = 50; //提示语的长度
 var videoHeigh = ~~window.getComputedStyle(document.querySelector("#video-container")).width.replace('px', '');
 var barrageBoxWrap = document.querySelector('.barrage-container-wrap');
@@ -34,15 +35,15 @@ function sendMsg() {
 
 
 //创建弹幕
-function createBarrage(msg, isSendMsg) {
+function createBarrage(msg, id, isSendMsg) {
 	var divNode = document.createElement('div');
 	var spanNode = document.createElement('span');
-
+	spanNode.name = id;
 	divNode.innerHTML = msg;
 	divNode.classList.add('barrage-item');
 	barrageBox.appendChild(divNode);
 
-	spanNode.innerHTML = '举报';
+	spanNode.innerHTML = '删除并禁言';
 	spanNode.classList.add('barrage-tip');
 	divNode.appendChild(spanNode);
 
@@ -92,10 +93,17 @@ function initBarrage(obj) {
 		barrageAnimate(this);
 	};
 
-	//举报
+	//禁言+删除是否成功
 	barrageChileNode.onclick = function() {
-		alert('举报成功');
-	}
+		socket.emit("ban", barrageChileNode.name, function(data) { // args are sent in order to acknowledgement function
+			if (data == 200) {
+				alert('成功');
+			} else {
+				alert("你没有权限")
+			}
+		});
+
+}
 }
 
 //弹幕动画
@@ -144,7 +152,14 @@ function newDanmu() {
 		// todo 弹幕验证，去除黄暴信息
 		inputBox.value = '';
 		socket.emit("new_danmu", {
-			"text": r
+			"text": r,
+			"ip": returnCitySN["cip"]
+		}, function(data) {
+			if (data == 200) {
+				inputBox.value = '';
+			} else if (data == "ban") {
+				alert("你被管理员禁言了");
+			}
 		});
 	}
 }
@@ -177,6 +192,11 @@ function newDanmu() {
 	}
 
 }());
+function danmu(id, data) {
+	this.id = id;
+	this.data = data;
+	this.time = (new Date()).valueOf();
+}
 // 结束
 var socket;
 $(document).ready(function() {
@@ -185,15 +205,17 @@ $(document).ready(function() {
 		// path: '/socket.io/new_danmu',
 		transports: ['websocket']
 	});
-	socket.on('watchersNum', function (res) {
-			// res的值是在线人数，动态改变
+	socket.on('watchersNum', function(res) {
+		// res的值是在线人数，动态改变
 	})
 	socket.on('connect', function() {
 		console.info("连接弹幕服务器成功")
 	});
 	socket.on('danmu', function(res) {
 		//res表示接收的数据，这里做数据的处理
-		createBarrage(res, true);
+		var d = new danmu(res["id"], res["data"]);
+		danmuArray.push(d);
+		createBarrage(d.data, d.id, true);
 		//生成弹幕
 	});
 

@@ -2,12 +2,10 @@
 
 # gevent
 from gevent import monkey
+monkey.patch_all()
 
 import danmuServer
-
-monkey.patch_all()
 from gevent.pywsgi import WSGIServer
-
 from datetime import timedelta
 import config
 from flask_cache import Cache
@@ -181,6 +179,7 @@ def Check(a=0, user="Fnull", timel="Fnull"):
             print("token非法")
         return v
     elif a == 1:
+        # 取token
         rkey = str(random.randint(100, 999))
         return config.encryption(rkey, user, timel)
     else:

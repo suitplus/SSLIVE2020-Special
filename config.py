@@ -29,7 +29,8 @@ LiveStatePort = 555
 Danmu_SocketPort = 90
 # 弹幕服务器外显端口
 Danmu_showPort = 90
-
+# 分钟为单位
+banTime = 5
 
 def md5(a):
     # md5 加密
