@@ -98,6 +98,7 @@ def newban(data):
 def banListChange(ip):
     timeStamp = time.localtime(float(ip.time / 1000))
     startTime = time.strftime("%Y-%m-%d %H:%M:%S", timeStamp)
+    # TODO 计算还有多久解禁
     # timeStamp = time.localtime(float(ip.time / 1000)) + datetime.timedelta(minutes=10)
     # endTime = time.strftime("%Y-%m-%d %H:%M:%S", timeStamp)
     emit("banListChange", {"ip": ip.ip,
