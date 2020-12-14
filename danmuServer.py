@@ -67,6 +67,7 @@ def adding(data):
     danmu = SingleDanmu(str(r), str(ip))
     danmuList.append(danmu)
     emit("danmu", {'id': danmu.id, 'data': danmu.value}, broadcast=True)
+    emit("AdmDanmu", {'id': danmu.id, 'data': danmu.value, 'ip': danmu.senderIp}, namespace="Adm", broadcast=True)
     return 200
 
 
@@ -106,7 +107,10 @@ def disconnect():
 
 @socketio.on('connect', namespace="Adm")
 def Mconnect():
+    global OnlineWatchers
     if Main.Check():
+        OnlineWatchers -= 1
+        changingInwatcher()
         print("管理员登录")
     else:
         ConnectionRefusedError('authentication failed')
@@ -131,7 +135,7 @@ def Mban(data):
 
 @socketio.on('disconnect', namespace="Adm")
 def Mdisconnect():
-    print("管理员接入")
+    print("管理员退出")
 
 
 @socketApp.route('/', methods=["GET"])

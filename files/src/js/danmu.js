@@ -148,7 +148,7 @@ inputBox.onkeydown = function(e) {
 
 function newDanmu() {
 	r = sendMsg();
-	if (r != "nullandnull") {
+	if (r != "Nullandnull") {
 		// todo 弹幕验证，去除黄暴信息
 		inputBox.value = '';
 		socket.emit("new_danmu", {
@@ -216,8 +216,10 @@ $(document).ready(function() {
 		//res表示接收的数据，这里做数据的处理
 		var d = new danmu(res["id"], res["data"]);
 		danmuArray.push(d);
-		createBarrage(d.data, d.id, true);
-		//生成弹幕
+		if(document.getElementById("danmuS").checked) {
+            createBarrage(d.data, d.id, true);
+            //生成弹幕
+        }
 	});
 
 });

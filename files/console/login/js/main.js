@@ -52,8 +52,16 @@ function showSB(msg) {
 	document.querySelector('#snackbar-tip').MaterialSnackbar.showSnackbar(data);
 
 }
+var T = false;
+function valid(){
+	T = true;
 
+}
 function submita() {
+	if(T == false){
+		alert("请通过人机验证");
+		return false;
+	}
 	//显示加载特效
 	//$('#loading').show();
 	//用jq取值

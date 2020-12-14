@@ -86,10 +86,18 @@
 							<div id="fullscreen" style="background-image: url('/files/src/img/control/fullscreen.svg');" class="video-controller">
 							</div>
 						</div>
-
-						<div class="send-wrap">
-							<input type="text" class="input" placeholder="弹幕发送">
-							<span class="send-btn">发送</span>
+						<div>
+							<div class="send-wrap">
+								<input type="text" class="input" placeholder="弹幕发送">
+								<span class="send-btn">发送</span>
+							</div>
+							<div id="danmuSwitch">
+								弹幕开关
+								<label class="switch">
+								  <input type="checkbox" id="danmuS" checked>
+								  <div class="slider round"></div>
+								</label>
+							</div>
 						</div>
 						{% include '/module/review.html' %}
 
