@@ -16,6 +16,7 @@
 		<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 		<!-- websocket -->
 		<script src="https://cdn.bootcdn.net/ajax/libs/socket.io/2.3.1/socket.io.min.js"></script>
+		<script src="/files/console/jquery.cookie.js"></script>
 		<script>
 			var DanmuPort = {{ DanmuPort }};
 		</script>
@@ -23,8 +24,9 @@
 
 	<body>
 		待开发
-	<div id="danmuList">
-
+	<div id="danmuList" style="float: left;">
+	</div>
+	<div id="blackList" style="float: right;">
 	</div>
 	</body>
 	<script src="/files/src/js/DanmuM.js"></script>

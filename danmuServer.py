@@ -1,8 +1,10 @@
 # 官方文档 https://flask-socketio.readthedocs.io/en/latest/
+import datetime
+
 import Main
 import config
 from flask import Flask
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit, join_room, leave_room
 import time
 
 
@@ -67,22 +69,41 @@ def adding(data):
     danmu = SingleDanmu(str(r), str(ip))
     danmuList.append(danmu)
     emit("danmu", {'id': danmu.id, 'data': danmu.value}, broadcast=True)
-    emit("AdmDanmu", {'id': danmu.id, 'data': danmu.value, 'ip': danmu.senderIp}, namespace="Adm", broadcast=True)
+    # 通知管理员
+    emit("AdmDanmu", {'id': str(danmu.id), 'data': danmu.value, 'ip': danmu.senderIp}, room="Adm", broadcast=True)
     return 200
 
 
 @socketio.on('ban')
-def ban(data):
+def newban(data):
     if Main.Check():
         # toekn合法即有权限
-        for mess in danmuList:
-            if mess.id == data:
-                print("封禁ip", mess.senderIp)
-                b = ban(mess.senderIp)
-                blackList.append(b)
-        return 200
-    else:
-        return 404
+        if type(data) == dict:
+            print("封禁ip", data['ip'])
+            b = ban(data['ip'])
+            blackList.append(b)
+            banListChange(b)
+            return 200
+        else:
+            for mess in danmuList:
+                if mess.id == data:
+                    print("封禁ip", mess.senderIp)
+                    b = ban(mess.senderIp)
+                    blackList.append(b)
+                    banListChange(b)
+                    return 200
+    return 404
+
+
+def banListChange(ip):
+    timeStamp = time.localtime(float(ip.time / 1000))
+    startTime = time.strftime("%Y-%m-%d %H:%M:%S", timeStamp)
+    # timeStamp = time.localtime(float(ip.time / 1000)) + datetime.timedelta(minutes=10)
+    # endTime = time.strftime("%Y-%m-%d %H:%M:%S", timeStamp)
+    emit("banListChange", {"ip": ip.ip,
+                           "startTime": startTime,
+                           "endTime":  str(config.banTime) + "分钟后"
+                           }, room="Adm", broadcast=True)
 
 
 def changingInwatcher():
@@ -105,36 +126,23 @@ def disconnect():
     changingInwatcher()
 
 
-@socketio.on('connect', namespace="Adm")
-def Mconnect():
+@socketio.on("Adm")
+def Adm(res):
     global OnlineWatchers
-    if Main.Check():
+    if Main.Check(user=res["user"], timel=res["time"], token=res["token"]):
         OnlineWatchers -= 1
         changingInwatcher()
-        print("管理员登录")
+        # 加入管理组
+        join_room("Adm")
+        print("新管理员登录")
+        return 200
     else:
-        ConnectionRefusedError('authentication failed')
-
-
-@socketio.on('ban', namespace="Adm")
-def Mban(data):
-    # toekn合法即有权限
-    # data 应该是 {'data': ip或弹幕id, 'type': '1'=弹幕id '2'=ip}
-    d = data.get("data")
-    t = data.get("ip")
-    if t == "1":
-        for mess in danmuList:
-            if mess.id == d:
-                print("封禁ip", mess.senderIp)
-                b = ban(mess.senderIp)
-                blackList.append(b)
-    if t == "2":
-        b = ban(d)
-        blackList.append(b)
+        return 2333
 
 
 @socketio.on('disconnect', namespace="Adm")
 def Mdisconnect():
+    # leave_room("Administer")
     print("管理员退出")
 
 

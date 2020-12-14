@@ -158,10 +158,9 @@ def danmuMange():
         return "502<br/><b>请先登录</b><br/><a href=\"\\admin\">登录页面</a>"
 
 
-def Check(a=0, user="Fnull", timel="Fnull"):
+def Check(a=0, user="Fnull", timel="Fnull", token="Fnull"):
     # 验证token
     if a == 0:
-        token = ""
         if (user == "Fnull") and (timel == "Fnull"):
             user = request.cookies.get("user", default="null", type=str)
             timel = request.cookies.get("time", default="null", type=str)
