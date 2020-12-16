@@ -49,6 +49,14 @@ danmuList = []
 blackList = []
 OnlineWatchers = 0
 
+@socketio.on("reFreshBanList")
+def refresh(data):
+    global blackList
+    for a in blackList:
+        if a.isOut():
+            emit("AdmDanmuD", a.ip)
+            blackList.remove(a)
+
 
 @socketio.on('new_danmu')
 def adding(data):
@@ -61,6 +69,7 @@ def adding(data):
             # 是否在黑名单
             if bip.isOut():
                 # 是否超出封禁时间
+                emit("AdmDanmuD", bip)
                 blackList.remove(bip)
             else:
                 return "ban"
@@ -98,12 +107,11 @@ def newban(data):
 def banListChange(ip):
     timeStamp = time.localtime(float(ip.time / 1000))
     startTime = time.strftime("%Y-%m-%d %H:%M:%S", timeStamp)
-    # TODO 计算还有多久解禁
-    # timeStamp = time.localtime(float(ip.time / 1000)) + datetime.timedelta(minutes=10)
-    # endTime = time.strftime("%Y-%m-%d %H:%M:%S", timeStamp)
+    timeStamp = time.localtime(float((ip.time + 10 * 60000) / 1000))
+    endTime = time.strftime("%Y-%m-%d %H:%M:%S", timeStamp)
     emit("banListChange", {"ip": ip.ip,
                            "startTime": startTime,
-                           "endTime":  str(config.banTime) + "分钟后"
+                           "endTime":  endTime
                            }, room="Adm", broadcast=True)
 
 

@@ -17,13 +17,24 @@ $(document).ready(function() {
 	})
 	socket.on('AdmDanmu', function(res) {
 		//res表示接收的数据，这里做数据的处理
-		$("#danmuList").prepend("<div >"+"id: " + res["id"] + " 内容: " + res['data'] + " ip: " + res['ip']+"<div><br/>" +
-			"<button onclick=\"ban('" + res["ip"] + "')\">封禁</button>")
+		if($("#" + res["id"]).length > 0){
+			document.getElementById(res["ip"]).parentNode.removeChild(document.getElementById(res["ip"]));
+		}
+		$("#danmuList").prepend("<div id='" + res["id"] + "'>"+"id: " + res["id"] + " 内容: " + res['data'] + " ip: " + res['ip']+"<div><br/>" +
+			"<button onclick=\"ban('" + res["ip"] + "')\">封禁</button>");
 	});
+	socket.on('AdmDanmuD', function (res) {
+		if($("#" + res).length > 0){
+			document.getElementById(res).parentNode.removeChild(document.getElementById(res));
+		}
+	})
 	socket.on('connect', function() {
-		console.info("连接弹幕服务器成功")
+		console.info("连接弹幕服务器成功");
 	});
 });
+function refresh(){
+	socket.emit("reFreshBanList", "");
+}
 function ban(res) {
 	socket.emit("ban", {'ip':res, 'method': "ip"},function(ress){
 		if(ress == 200){
