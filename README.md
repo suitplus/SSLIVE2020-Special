@@ -64,6 +64,7 @@ flask_socketio 报错 unsupport client - 把前端js引用的socket.io.js从3.* 
    - [ ] 优化前端弹幕css和js文件里不必要的代码
    - [ ] 后端或前端筛选不规范（黄暴）弹幕，不予通过
    - [ ] 用户自定义发送的弹幕样式
+ - [ ] BBS?
  - [x] 弹幕功能(使用flask-socketio + socket.io.js)
    - [x] 统一的弹幕服务器
    - [x] 高逼格的简单小东西(在线用户数)
