@@ -26,6 +26,8 @@ All the source code in this repository (EXCEPT FOR the code in mdl, src/lib/ and
 
 然后点开`/Win`下的`启动脚本.bat`，不要关掉这个窗口
 
+如果报错说python没有什么库，比如`no module name xxx`，就用在cmd`pip install xxx`命令安装
+
 **linux 启动方式**
 
 先用搜索引擎上的教程装好nginx
@@ -36,7 +38,7 @@ All the source code in this repository (EXCEPT FOR the code in mdl, src/lib/ and
 
 在里面先用cd进入到根目录，然后用python Server.py启动(就是`启动脚本.bat`里的代码)
 
-如果报错没有什么库，就用 `pip install xxx` 装
+如果报错说python没有什么库，比如`no module name xxx`，就用在cmd`pip install xxx`命令安装
 
 然后退出screen的窗口，关于为什么用screen是因为我们要让这个窗口一直运行，而开始的窗口一旦退出就不会运行了
 
