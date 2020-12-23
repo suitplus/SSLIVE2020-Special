@@ -31,6 +31,9 @@ Danmu_SocketPort = 90
 Danmu_showPort = 90
 # 分钟为单位
 banTime = 5
+# 弹幕中需替换词，用|分割
+sensitive_words = "sb|cnm|nmsl"
+
 
 def md5(a):
     # md5 加密

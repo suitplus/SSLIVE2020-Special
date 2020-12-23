@@ -1,11 +1,11 @@
 # 官方文档 https://flask-socketio.readthedocs.io/en/latest/
-import datetime
-
+import re
 import Main
 import config
 from flask import Flask
 from flask_socketio import SocketIO, emit, join_room, leave_room
 import time
+import WordsSearch
 
 
 class ban:
@@ -21,7 +21,7 @@ class ban:
 
     def isOut(self):
         # 是否超
-        return ((int(round(time.time() * 1000))-self.time)/60000.00) >= config.banTime
+        return ((int(round(time.time() * 1000)) - self.time) / 60000.00) >= config.banTime
 
 
 class SingleDanmu:
@@ -48,6 +48,10 @@ danmuList = []
 # 封禁ip名单
 blackList = []
 OnlineWatchers = 0
+# 初始化替换 https://github.com/toolgood/ToolGood.Words/tree/master/python
+search = WordsSearch.WordsSearch()
+search.SetKeywords(config.sensitive_words.split('|'))
+
 
 @socketio.on("reFreshBanList")
 def refresh(data):
@@ -60,6 +64,7 @@ def refresh(data):
 
 @socketio.on('new_danmu')
 def adding(data):
+    global search
     global OnlineWatchers
     global blackList
     r = data.get("text")
@@ -73,7 +78,14 @@ def adding(data):
                 blackList.remove(bip)
             else:
                 return "ban"
+    # 禁发网址
+    pattern = re.compile(r'[a-zA-z]+:[^\s]*/[^\s]*/[^\s]*')
+    if pattern.search(r) is not None:
+        return 301
     print("新建弹幕", r)
+    # 执行替换
+    r = search.Replace(r, "*")
+    print("替换后", r)
     # 加入历史弹幕集
     danmu = SingleDanmu(str(r), str(ip))
     danmuList.append(danmu)
@@ -111,7 +123,7 @@ def banListChange(ip):
     endTime = time.strftime("%Y-%m-%d %H:%M:%S", timeStamp)
     emit("banListChange", {"ip": ip.ip,
                            "startTime": startTime,
-                           "endTime":  endTime
+                           "endTime": endTime
                            }, room="Adm", broadcast=True)
 
 
