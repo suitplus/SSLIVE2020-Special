@@ -3,13 +3,17 @@ var player;
 var isplay = false;
 var lastRunTime=new Date().getTime();//初始化保护的时间
 var protectTime=1000;//设置保护性延时 单位毫秒，不要小于50 建议100以上，1000是1s
+
+function hide() {
+    $("#tips_chip").hide();
+}
+
 //var isdanmu = true;
 
 function danmu_submit() {
     send_danmu($('#danmu-sender-input').val(), "white", 0, 0);
     $('#danmu-sender-input').val("");
 }
-
 // 加载播放器
 function load() {
     resize();

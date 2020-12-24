@@ -46,18 +46,22 @@
 			var DanmuPort = {{ DanmuPort }};
 			// 历史弹幕数量
 			var danmuNum = {{ danmuNum }};
+
 		</script>
 	</head>
 
 	<body>
-		<!-- TODO 加入推荐使用Chrome浏览器的header和b站跳转提示 -->
 		<div id="container">
 			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 				{% include '/module/guiding_intro.html' %}
+				<span id="tips_chip" class="mdl-chip mdl-chip--deletable">
+					<span class="mdl-chip__text">推荐使用<a href="https://www.google.cn/chrome/index.html">Chrome浏览器</a></span>
+					<button type="button" class="mdl-chip__action" onclick="hide()"><i class="material-icons">cancel</i></button>
+				</span>
 				<main class="mdl-layout__content">
 					<!-- 此处有个空div是为了防止一个错误(https://blog.csdn.net/qq_39100704/article/details/100918880) -->
 					<div>
-						<div id="video-container">
+						<div id="video-container" style="float: bottom">
 							<!-- <div id="danmu"></div> -->
 							<!-- x5-video-player-type="h5-page"让安卓微信视频使用H5同层播放器以实现弹幕 -->
 							<!-- https://x5.tencent.com/tbs/guide/video.html -->
@@ -67,14 +71,12 @@
 							 class="video-js vjs-big-play-centered vjs-fluid">
 							</video>
 						</div>
-						<div class="box">
+						<div class="box" style="float: bottom">
 							<div class="barrage-container-wrap clearfix">
 								<div class="barrage-container">
 								</div>
 							</div>
-
 						</div>
-
 						<div id="video-controller-container">
 							<div id="play" style="background-image: url('/files/src/img/control/pause.svg');" class="video-controller"></div>
 							<div id="onlineW"></div>
@@ -92,6 +94,10 @@
 								<span class="send-btn">发送</span>
 							</div>
 							<div id="danmuSwitch">
+								<button type="button" class="mdl-chip" onclick="javascrtpt:window.location.href='https://live.bilibili.com/10038913'"">
+									<span class="mdl-chip__text">点我跳转到b站同步直播间</span>
+								</button>
+
 								弹幕开关
 								<label class="switch">
 								  <input type="checkbox" id="danmuS" checked>
@@ -107,4 +113,12 @@
 
 	</body>
 	<script src="/files/src/js/danmu.js"></script>
+	<script>
+		//浏览器判断
+		//见https://blog.csdn.net/AinUser/article/details/78994257
+		var webkit = /webkit/.test(navigator.userAgent.toLowerCase());
+		if(webkit){
+				$("#tips_chip").hide();
+		}
+	</script>
 </html>

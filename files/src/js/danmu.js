@@ -19,7 +19,6 @@ var sendBtn = document.querySelector('.send-btn');
 //容器的宽高度
 barrageWidth = $(".barrage-container-wrap").width();
 barrageHeight = $(".barrage-container-wrap").height();
-
 //发送
 function sendMsg() {
 	var inputValue = inputBox.value;
@@ -149,7 +148,6 @@ inputBox.onkeydown = function(e) {
 function newDanmu() {
 	r = sendMsg();
 	if (r != "Nullandnull") {
-		// TODO 弹幕验证，去除黄暴信息
 		inputBox.value = '';
 		socket.emit("new_danmu", {
 			"text": r,
