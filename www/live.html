@@ -61,50 +61,64 @@
 				<main class="mdl-layout__content">
 					<!-- 此处有个空div是为了防止一个错误(https://blog.csdn.net/qq_39100704/article/details/100918880) -->
 					<div>
-						<div id="video-container" style="float: bottom">
-							<!-- <div id="danmu"></div> -->
-							<!-- x5-video-player-type="h5-page"让安卓微信视频使用H5同层播放器以实现弹幕 -->
-							<!-- https://x5.tencent.com/tbs/guide/video.html -->
-							<!-- 两个playsinline让iOS微信视频可仅在全屏状态下播放以实现弹幕 -->
-							<!-- 基本上达到了bilibili网页版的水平 -->
-							<video x5-video-player-type="h5-page" webkit-playsinline="true" playsinline="true" x-webkit-airplay="true" id="video"
-							 class="video-js vjs-big-play-centered vjs-fluid">
-							</video>
-						</div>
-						<div class="box" style="float: bottom">
-							<div class="barrage-container-wrap clearfix">
-								<div class="barrage-container">
-								</div>
+						<div style="float:right">
+							<div style="width:30vw;margin-right: 1vw;background-color: #F5F5F5;cursor:pointer;" onclick="ExpandDanmu()">
+								<span style="padding-right: 2vw;float: right;font-size: 1vw;padding-top: 2vw;" id="ExpandTip">收起</span>
+								<div style="margin-left: 2vw;padding-top: 2vw;font-size: 3vw;padding-bottom: 2vw;">弹幕列表</div>
+							</div>
+							<div id="DList" style="width: 30vw;overflow:auto;height: 35vw;background-color:#C0C0C0;">
 							</div>
 						</div>
-						<div id="video-controller-container">
-							<div id="play" style="background-image: url('/files/src/img/control/pause.svg');" class="video-controller"></div>
-							<div id="onlineW"></div>
-							<!--<div id="danmusettings" style="background-image: url('/files/src/img/danmu/settings.svg');visibility: hidden;"
+						<div style="width:60vw;margin-left: 5vw;margin-bottom: 5vh;margin-top:5vh">
+							<div class="box">
+								<div class="barrage-container-wrap clearfix">
+									<div class="barrage-container" style="overflow: hidden;">
+									</div>
+								</div>
+							</div>
+							<div id="video-container" style="float: bottom">
+								<!-- <div id="danmu"></div> -->
+								<!-- x5-video-player-type="h5-page"让安卓微信视频使用H5同层播放器以实现弹幕 -->
+								<!-- https://x5.tencent.com/tbs/guide/video.html -->
+								<!-- 两个playsinline让iOS微信视频可仅在全屏状态下播放以实现弹幕 -->
+								<!-- 基本上达到了bilibili网页版的水平 -->
+								<video x5-video-player-type="h5-page" webkit-playsinline="true" playsinline="true" x-webkit-airplay="true" id="video"
+								 class="video-js vjs-big-play-centered vjs-fluid">
+								</video>
+							</div>
+
+							<div id="video-controller-container">
+								<div id="play" style="background-image: url('/files/src/img/control/pause.svg');" class="video-controller"></div>
+								<div id="onlineW"></div>
+								<!--<div id="danmusettings" style="background-image: url('/files/src/img/danmu/settings.svg');visibility: hidden;"
             class="video-controller">
         </div>
         <div id="danmuswitch" style="background-image: url('/files/src/img/danmu/on.svg')" class="video-controller"></div>
         -->
-							<div id="fullscreen" style="background-image: url('/files/src/img/control/fullscreen.svg');" class="video-controller">
+								<div id="fullscreen" style="background-image: url('/files/src/img/control/fullscreen.svg');" class="video-controller">
+								</div>
 							</div>
+
 						</div>
-						<div>
+						<div style="margin-left: 5vw;;">
 							<div class="send-wrap">
 								<input type="text" class="input" placeholder="弹幕发送">
 								<span class="send-btn">发送</span>
 							</div>
-							<div id="danmuSwitch">
-								<button type="button" class="mdl-chip" onclick="javascrtpt:window.location.href='https://live.bilibili.com/10038913'"">
-									<span class="mdl-chip__text">点我跳转到b站同步直播间</span>
-								</button>
-
+							<div style="float: right;">
 								弹幕开关
 								<label class="switch">
-								  <input type="checkbox" id="danmuS" checked>
-								  <div class="slider round"></div>
+									<input type="checkbox" id="danmuS" checked>
+									<div class="slider round"></div>
 								</label>
 							</div>
+							<div id="danmuSwitch">
+								<button type="button" class="mdl-chip" onclick="javascrtpt:window.location.href='https://live.bilibili.com/10038913'">
+									<span class="mdl-chip__text">点我跳转到b站同步直播间</span>
+								</button>
+							</div>
 						</div>
+						<br />
 						{% include '/module/review.html' %}
 
 						{% include '/module/footer.html' %}
@@ -117,8 +131,8 @@
 		//浏览器判断
 		//见https://blog.csdn.net/AinUser/article/details/78994257
 		var webkit = /webkit/.test(navigator.userAgent.toLowerCase());
-		if(webkit){
-				$("#tips_chip").hide();
+		if (webkit) {
+			$("#tips_chip").hide();
 		}
 	</script>
 </html>

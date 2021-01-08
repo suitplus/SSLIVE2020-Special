@@ -75,7 +75,7 @@ def IE():
 # 下面两行调试的时候加，非调试在正式情况下最好去掉
 @app.route('/live')
 @cross_origin()
-@cache.cached()
+# @cache.cached()
 def live():
     # 直播页面
     return render_template('live.html', port=config.LiveStatePort, DanmuPort=config.Danmu_showPort,

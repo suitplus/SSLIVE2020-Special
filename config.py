@@ -5,9 +5,9 @@ import hashlib
 password = {"suit": "lovesuit"}
 # cookie加密用，字符key，更改会使之前用这个key加密的cookies失效
 random_chars = "fsajfsjhs"
-# 静态文件缓存时间，[day,hour,minutes]
+# 静态文件缓存时间，[day,hour,minutes] 12
 cache_time = [0, 12, 0]
-# 缓存过期时间，秒为单位
+# 缓存过期时间，秒为单位 300
 cache_out_time = 300
 # root folder网址根目录文件夹名称
 root = "www"

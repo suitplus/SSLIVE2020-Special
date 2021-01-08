@@ -21,7 +21,7 @@ barrageWidth = $(".barrage-container-wrap").width();
 barrageHeight = $(".barrage-container-wrap").height();
 //发送
 function sendMsg() {
-	var inputValue = inputBox.value;
+	let inputValue = inputBox.value;
 	inputValue.replace(/\ +/g, "");
 
 	if (inputValue.length <= 0) {
@@ -34,9 +34,15 @@ function sendMsg() {
 
 
 //创建弹幕
-function createBarrage(msg, id, isSendMsg) {
-	var divNode = document.createElement('div');
-	var spanNode = document.createElement('span');
+function createBarrage(chain, isSendMsg) {
+	let msg = chain.data
+	let id = chain.id
+	let temp = $("<div><span>"+id+"</span>\
+	<span style='word-wrap: break-word;\
+    word-break: break-all;'>"+msg+"</span></div>");
+	$("#DList").prepend(temp);
+	let divNode = document.createElement('div');
+	let spanNode = document.createElement('span');
 	spanNode.name = id;
 	divNode.innerHTML = msg;
 	divNode.classList.add('barrage-item');
@@ -46,10 +52,10 @@ function createBarrage(msg, id, isSendMsg) {
 	spanNode.classList.add('barrage-tip');
 	divNode.appendChild(spanNode);
 
-	var barrageOffsetLeft = getRandom(barrageWidth, barrageWidth * 2);
+	let barrageOffsetLeft = getRandom(barrageWidth, barrageWidth * 2);
 	barrageOffsetLeft = isSendMsg ? barrageWidth : barrageOffsetLeft
-	var barrageOffsetTop = (getRandom(0, barrageHeight) - 10) / 4;
-	var barrageColor = barrageColorArray[Math.floor(Math.random() * (barrageColorArray.length))];
+	let barrageOffsetTop = (getRandom(0, barrageHeight) - 10) / 4;
+	let barrageColor = barrageColorArray[Math.floor(Math.random() * (barrageColorArray.length))];
 
 	//执行初始化滚动
 	initBarrage.call(divNode, {
@@ -75,7 +81,7 @@ function initBarrage(obj) {
 	this.timer = null;
 
 	//弹幕子节点
-	var barrageChileNode = this.children[0];
+	let barrageChileNode = this.children[0];
 	barrageChileNode.style.left = (this.width - barrageTipWidth) / 2 + 'px';
 
 	//运动
@@ -102,7 +108,7 @@ function initBarrage(obj) {
 			}
 		});
 
-}
+	}
 }
 
 //弹幕动画
@@ -157,7 +163,7 @@ function newDanmu() {
 				inputBox.value = '';
 			} else if (data == "ban") {
 				alert("你被管理员禁言了");
-			} else if (data == 301){
+			} else if (data == 301) {
 				alert("发送弹幕中包含网址");
 			}
 		});
@@ -216,10 +222,10 @@ $(document).ready(function() {
 		//res表示接收的数据，这里做数据的处理
 		var d = new danmu(res["id"], res["data"]);
 		danmuArray.push(d);
-		if(document.getElementById("danmuS").checked) {
-            createBarrage(d.data, d.id, true);
-            //生成弹幕
-        }
+		if (document.getElementById("danmuS").checked) {
+			createBarrage(d, true);
+			//生成弹幕
+		}
 	});
 
 });
