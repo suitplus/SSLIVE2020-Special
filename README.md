@@ -55,7 +55,7 @@ flask_socketio 报错 unsupport client - 把前端js引用的socket.io.js从3.* 
 
 **contributor list:**
 
-前端贡献者名单:
+本项目贡献者名单:
 
 1. Lin Sixing ([@LSX-s-Software](https://github.com/LSX-s-Software))
 2. Zeng Wenyi ([@vincenttsang](https://github.com/vincenttsang))
@@ -64,10 +64,6 @@ flask_socketio 报错 unsupport client - 把前端js引用的socket.io.js从3.* 
 5. Jia Boyi ([@ap0stader](https://github.com/ap0stader))
 6. Qiu Yiran ([@Nambers](https://github.com/Nambers))
 7. Chen Qixuan ([@Asiimoviet](https://github.com/Asiimoviet))
-
-后端贡献者名单:
-
-1. Qiu Yiran ([@Namebers](https://github.com/Nambers))
 
 ---
 
