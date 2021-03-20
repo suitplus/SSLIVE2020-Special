@@ -28,9 +28,9 @@ Authorities = [True, True, True]
 # 协同服务器端口s
 LiveStatePort = 555
 # 弹幕服务器启动端口
-Danmu_SocketPort = 90
+Danmu_SocketPort = 91
 # 弹幕服务器外显端口
-Danmu_showPort = 90
+Danmu_showPort = 91
 # 分钟为单位
 banTime = 5
 # 弹幕中需替换词，用|分割

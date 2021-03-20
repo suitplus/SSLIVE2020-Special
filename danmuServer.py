@@ -2,7 +2,7 @@
 import re
 import Main
 import config
-from flask import Flask
+from flask import Flask, request
 from flask_socketio import SocketIO, emit, join_room, leave_room
 import time
 import WordsSearch
@@ -68,7 +68,7 @@ def adding(data):
     global OnlineWatchers
     global blackList
     r = data.get("text")
-    ip = data.get("ip")
+    ip = request.headers['X-Real-IP']
     for bip in blackList:
         if bip.isIp(ip):
             # 是否在黑名单
@@ -79,9 +79,9 @@ def adding(data):
             else:
                 return "ban"
     # 禁发网址
-    pattern = re.compile(r'[a-zA-z]+:[^\s]*/[^\s]*/[^\s]*')
-    if pattern.search(r) is not None:
-        return 301
+    # pattern = re.compile(r'[a-zA-z]+:[^\s]*/[^\s]*/[^\s]*')
+    # if pattern.search(r) is not None:
+    #    return 301
     print("新建弹幕", r)
     # 执行替换
     r = search.Replace(r, "*")

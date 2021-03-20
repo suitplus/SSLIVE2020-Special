@@ -154,20 +154,18 @@ inputBox.onkeydown = function(e) {
 function newDanmu() {
 	r = sendMsg();
 	if (r != "Nullandnull") {
-		inputBox.value = '';
-		socket.emit("new_danmu", {
-			"text": r,
-			"ip": returnCitySN["cip"]
-		}, function(data) {
-			if (data == 200) {
-				inputBox.value = '';
-			} else if (data == "ban") {
-				alert("你被管理员禁言了");
-			} else if (data == 301) {
-				alert("发送弹幕中包含网址");
-			}
-		});
-	}
+        socket.emit("new_danmu", {
+            "text": r
+        }, function (data) {
+            if (data == 200) {
+                inputBox.value = '';
+            } else if (data == "ban") {
+                alert("你被管理员禁言了");
+            } else if (data == 301) {
+                alert("发送弹幕中包含网址");
+            }
+        });
+    }
 }
 
 //兼容写法
