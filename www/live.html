@@ -119,11 +119,26 @@
 						</div>
 						<br />
 						{% include '/module/review.html' %}
-
+						<div id="commit">
+						<div id="disqus_thread"></div>
+						<script>
+						    var disqus_config = function () {
+						    this.page.url = window.location.href;  // Replace PAGE_URL with your page's canonical URL variable
+						    this.page.identifier = "sser"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+						    };
+						    (function() { // DON'T EDIT BELOW THIS LINE
+						    var d = document, s = d.createElement('script');
+						    s.src = 'https://sser.disqus.com/embed.js';
+						    s.setAttribute('data-timestamp', +new Date());
+						    (d.head || d.body).appendChild(s);
+						    })();
+						</script>
+						<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+						</div>
 						{% include '/module/footer.html' %}
 
 				</main>
-
+				<script id="dsq-count-scr" src="//sser.disqus.com/count.js" async></script>
 	</body>
 	<script src="/files/src/js/danmu.js"></script>
 	<script>
