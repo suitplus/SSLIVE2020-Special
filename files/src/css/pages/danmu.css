@@ -124,7 +124,7 @@
 
 	/* 结束 */
 	#danmuSwitch {
-		float: right;
+		/* 2021/4/5 注释 float: right; */
 		margin-top: 1rem;
 		font-size: 1rem;
 	}
