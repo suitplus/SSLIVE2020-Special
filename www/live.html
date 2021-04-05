@@ -40,13 +40,12 @@
 		<script src="/files/src/util/checkandresize.js"></script>
 		<script src="https://cdn.bootcdn.net/ajax/libs/socket.io/2.3.1/socket.io.min.js"></script>
 		<script src="/files/src/js/live.js"></script>
-		<script>
+		<!--2021/4/5 <script>
 			// 弹幕服务器端口
 			var DanmuPort = {{ DanmuPort }};
 			// 历史弹幕数量
 			var danmuNum = {{ danmuNum }};
-
-		</script>
+		</script> -->
 	</head>
 
 	<body>
@@ -60,15 +59,16 @@
 				<main class="mdl-layout__content">
 					<!-- 此处有个空div是为了防止一个错误(https://blog.csdn.net/qq_39100704/article/details/100918880) -->
 					<div>
-						<div style="float:right">
+						<!--2021/4/5 删除 <div style="float:right">
 							<div style="width:30vw;margin-right: 1vw;background-color: #F5F5F5;cursor:pointer;" onclick="ExpandDanmu()">
 								<span style="padding-right: 2vw;float: right;font-size: 1vw;padding-top: 2vw;" id="ExpandTip">收起</span>
 								<div style="margin-left: 2vw;padding-top: 2vw;font-size: 3vw;padding-bottom: 2vw;">弹幕列表</div>
 							</div>
 							<div id="DList" style="width: 30vw;overflow:auto;height: 35vw;background-color:#C0C0C0;">
 							</div>
-						</div>
-						<div style="width:60vw;margin-left: 5vw;margin-bottom: 5vh;margin-top:5vh">
+						</div> -->
+						<!--2021/4/5 替换下一行 <div style="width:60vw;margin-left: 5vw;margin-bottom: 5vh;margin-top:5vh"> -->
+						<div style="width:75vw;margin-left: 12vw;margin-bottom: 5vh;margin-top:1vh">
 							<div class="box">
 								<div class="barrage-container-wrap clearfix">
 									<div class="barrage-container" style="overflow: hidden;">
@@ -99,8 +99,9 @@
 							</div>
 
 						</div>
-						<div style="margin-left: 5vw;;">
-							<div class="send-wrap">
+						<!--2021/4/5 替换下一行 <div style="margin-left: 5vw;"> -->
+						<div style="text-align: center;">
+							<!--2021/4/5 删除 <div class="send-wrap">
 								<input type="text" class="input" placeholder="弹幕发送">
 								<span class="send-btn">发送</span>
 							</div>
@@ -110,7 +111,7 @@
 									<input type="checkbox" id="danmuS" checked>
 									<div class="slider round"></div>
 								</label>
-							</div>
+							</div> -->
 							<div id="danmuSwitch">
 								<button type="button" class="mdl-chip" onclick="javascrtpt:window.location.href='https://live.bilibili.com/10038913'">
 									<span class="mdl-chip__text">点我跳转到b站同步直播间</span>
