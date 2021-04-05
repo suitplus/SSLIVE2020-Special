@@ -179,4 +179,4 @@ def SocketStart():
     # https_server.serve_forever()
     # 直接面向外网
     socketio.run(app=socketApp, host="0.0.0.0", port=config.Danmu_SocketPort,
-                 certfile="SSL/4837013_www.ssersay.cn.pem", keyfile="SSL/4837013_www.ssersay.cn.key")
+                 certfile="SSL/ssersay.cn_chain.crt", keyfile="SSL/ssersay.cn_key.key")
