@@ -154,7 +154,7 @@ body {
 /* 历次直播 */
 
 #content-review {
-    float: right;
+    /*2021/4/5 注释 float: right; */
     height:1024px;
     margin-left:30px;
     margin-right:30px;
