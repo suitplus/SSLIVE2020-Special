@@ -23,7 +23,7 @@ function clear_cache(){
 		data: {},
 		success: function(data) {
 			$("#cache_tip").text("成功");
-			window.setTimeout(function(){$("#cache_tip").text("");},5000);
+			window.setTimeout(function(){$("#cache_tip").text("");},3000);
 		}
 	});
 }
