@@ -23,6 +23,7 @@ function clear_cache(){
 		data: {},
 		success: function(data) {
 			$("#cache_tip").text("成功");
+			window.setTimeout(function(){$("#cache_tip").text("");},5000);
 		}
 	});
 }
@@ -45,3 +46,15 @@ function changelive() {
 		}
 	});
 }
+
+$(document).ready(function() {
+
+  // Check for click events on the navbar burger icon
+  $(".navbar-burger").click(function() {
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      $(".navbar-burger").toggleClass("is-active");
+      $(".navbar-menu").toggleClass("is-active");
+
+  });
+});

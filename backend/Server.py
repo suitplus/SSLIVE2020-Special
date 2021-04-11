@@ -1,3 +1,4 @@
+import os
 import threading
 import config
 from Main import setup
@@ -47,4 +48,3 @@ if __name__ == '__main__':
     t3.start()
     t2 = threading.Thread(target=SocketStart)
     t2.start()
-    # socketio.run(app, host=config.ip, port=config.LiveStatePort)

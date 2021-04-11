@@ -45,7 +45,6 @@ body {
     width: 100%;
     position: fixed;
     top: 0;
-    background-color: #2e2e2e;
     font-size: 24px;
 }
 
@@ -61,21 +60,25 @@ body {
     margin-top: 64px;
     width: 100%;
 }
+.main{
+	margin-top: 30vh;
+	margin-left: 50vw;
+	height: 100vh;
+}
 
 #timer {
     padding: 16px;
     text-align: center;
-    position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    white-space: nowrap;
+    /* white-space: nowrap; */
 }
 
 #timer-title {
     margin: 0;
-    font-size: 48px;
+    font-size: 3rem;
 }
 
 #timer-countdown {
@@ -91,7 +94,6 @@ body {
 }
 
 #LiveControl {
-    position: absolute;
     bottom: 20%;
     left: 50%;
     transform: translate(-50%, -50%);

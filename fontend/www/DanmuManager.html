@@ -17,6 +17,7 @@
 		<!-- websocket -->
 		<script src="https://cdn.bootcdn.net/ajax/libs/socket.io/2.3.1/socket.io.min.js"></script>
 		<script src="/files/console/jquery.cookie.js"></script>
+		<link rel="stylesheet" href="../files/src/css/module/bulma.css"/>
 		<script>
 			var DanmuPort = {{ DanmuPort }};
 		</script>
@@ -31,7 +32,7 @@
 		黑名单列表
 		<div id="blackList"></div>
 	</div>
-	<button onclick="refresh">刷新黑名单</button>
+	<button onclick="refresh" class="button is-rounded is-small is-success">刷新黑名单</button>
 	</body>
 	<script src="/files/src/js/DanmuM.js"></script>
 

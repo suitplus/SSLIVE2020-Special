@@ -1,3 +1,3 @@
 cd ../
-python Server.py
+python backend/Server.py
 pause

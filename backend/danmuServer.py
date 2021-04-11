@@ -54,7 +54,7 @@ search.SetKeywords(config.sensitive_words.split('|'))
 
 
 @socketio.on("reFreshBanList")
-def refresh(data):
+def refresh():
     global blackList
     for a in blackList:
         if a.isOut():
@@ -179,4 +179,4 @@ def SocketStart():
     # https_server.serve_forever()
     # 直接面向外网
     socketio.run(app=socketApp, host="0.0.0.0", port=config.Danmu_SocketPort,
-                 certfile="SSL/ssersay.cn_chain.crt", keyfile="SSL/ssersay.cn_key.key")
+                 certfile=config.ssl_crt, keyfile=config.ssl_key)

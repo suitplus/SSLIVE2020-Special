@@ -201,8 +201,8 @@ import threading
 
 
 def startEach(ip, port):
-    https_server = WSGIServer((ip, port), app, certfile="SSL/ssersay.cn_chain.crt",
-                              keyfile="SSL/ssersay.cn_key.key", spawn=200)
+    https_server = WSGIServer((ip, port), app, certfile=config.ssl_crt,
+                              keyfile=config.ssl_key, spawn=200)
     print("https server start")
     https_server.serve_forever()
 
