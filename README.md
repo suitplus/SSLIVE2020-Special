@@ -70,7 +70,6 @@ flask_socketio 报错 unsupport client - 把前端js引用的socket.io.js从3.* 
 **TODO**
 
  - [ ] 更换vue.js + go的解决方案，react JSX的可读性和易上手度可能会低一点，后端用node.js或ktor也可以，不过go比较轻便
- - [ ] 用bulma可以解决css适配
  - [ ] 后台管理页面优化
    - [x] 在弹幕管理后端显示黑名单解禁时间
    - [x] 主后台页面管理优化(样式优化和下面的功能优化)
