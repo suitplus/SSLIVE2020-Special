@@ -4,14 +4,12 @@
 from gevent import monkey
 
 monkey.patch_all()
-import sys 
-sys.path.append("..\\") 
+# import sys
+# sys.path.append("..\\")
 
-import danmuServer
+from backend import danmuServer
 from gevent.pywsgi import WSGIServer
-from datetime import timedelta
-import config
-from flask_cache import Cache
+from backend import config
 from flask import Flask, render_template, request, make_response, redirect
 import random
 import time
