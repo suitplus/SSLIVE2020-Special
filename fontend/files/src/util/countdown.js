@@ -1,4 +1,4 @@
-var CountdownEnd = new Date("2020/12/03,00:00:00");
+var CountdownEnd = new Date("2021/04/18,19:00:00");
 $.ajax({
 	url: "/files/config/coding/livestart.json",
 	method: "GET",
