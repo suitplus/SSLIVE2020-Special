@@ -34,7 +34,13 @@ All the source code in this repository (EXCEPT FOR the code in mdl, src/lib/ and
 
 然后把\Win\nginx-1.18.0\conf\nginx.conf里的配置复制到新的nginx里的nginx.conf里
 
-然后装python,并用screen这个组件？打开一个新窗口
+然后装python,并用screen这个组件？打开一个新窗口(`screen -S name`创建, `ctrl+a+d` 脱离, `screen -r name` 恢复, `screen -ls`列出列表)
+
+更改Config.py中ssl设置
+```
+ssl_crt = "/root/SSLIVE2020-Special/backend/SSL/ssersay.cn_chain.crt"
+ssl_key = "/root/SSLIVE2020-Special/backend/SSL/ssersay.cn_key.key"
+```
 
 在里面先用cd进入到根目录，然后用python Server.py启动(就是`启动脚本.bat`里的代码)
 
@@ -47,7 +53,7 @@ All the source code in this repository (EXCEPT FOR the code in mdl, src/lib/ and
 
 **可能的bugs的解决方法**
 
-flask_cache cannot import 'import_string' -  https://www.cnblogs.com/gavinclc/p/9622095.html
+flask_cache cannot import 'import_string' -  https://www.cnblogs.com/gavinclc/p/9622095.html 和 安装pip install werkzeug== 0.16.1([来源](https://blog.csdn.net/loongago/article/details/113775365))
 
 flask_socketio 报错 unsupport client - 把前端js引用的socket.io.js从3.* 改成2.* 的版本
 
