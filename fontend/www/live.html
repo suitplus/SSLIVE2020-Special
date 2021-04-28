@@ -41,12 +41,22 @@
 		<script src="https://cdn.bootcdn.net/ajax/libs/socket.io/2.3.1/socket.io.min.js"></script>
 		<script src="/files/src/js/live.js"></script>
 		<link rel="stylesheet" href="/files/src/css/module/bulma.css">
-		<!--2021/4/5 <script>
+		<script>
 			// 弹幕服务器端口
-			var DanmuPort = {{ DanmuPort }};
+			var DanmuPort = {
+			{
+				DanmuPort
+			}
+			}
+			;
 			// 历史弹幕数量
-			var danmuNum = {{ danmuNum }};
-		</script> -->
+			var danmuNum = {
+			{
+				danmuNum
+			}
+			}
+			;
+		</script>
 	</head>
 
 	<body>
@@ -60,30 +70,30 @@
 				<main class="mdl-layout__content">
 					<!-- 此处有个空div是为了防止一个错误(https://blog.csdn.net/qq_39100704/article/details/100918880) -->
 					<div>
-						<!--2021/4/5 删除 <div style="float:right">
-							<div style="width:30vw;margin-right: 1vw;background-color: #F5F5F5;cursor:pointer;" onclick="ExpandDanmu()">
-								<span style="padding-right: 2vw;float: right;font-size: 1vw;padding-top: 2vw;" id="ExpandTip">收起</span>
-								<div style="margin-left: 2vw;padding-top: 2vw;font-size: 3vw;padding-bottom: 2vw;">弹幕列表</div>
-							</div>
-							<div id="DList" style="width: 30vw;overflow:auto;height: 35vw;background-color:#C0C0C0;">
-							</div>
-						</div> -->
+						<!--						历史弹幕显示 太丑了就禁了<div style="float:right">-->
+						<!--							<div style="width:30vw;margin-right: 1vw;background-color: #F5F5F5;cursor:pointer;" onclick="ExpandDanmu()">-->
+						<!--								<span style="padding-right: 2vw;float: right;font-size: 1vw;padding-top: 2vw;" id="ExpandTip">收起</span>-->
+						<!--								<div style="margin-left: 2vw;padding-top: 2vw;font-size: 3vw;padding-bottom: 2vw;">弹幕列表</div>-->
+						<!--							</div>-->
+						<!--							<div id="DList" style="width: 30vw;overflow:auto;height: 35vw;background-color:#C0C0C0;">-->
+						<!--							</div>-->
+						<!--						</div>-->
 						<!--2021/4/5 替换下一行 <div style="width:60vw;margin-left: 5vw;margin-bottom: 5vh;margin-top:5vh"> -->
 						<div style="width:75vw;margin-left: 12vw;margin-bottom: 5vh;margin-top:1vh">
-							<!-- 2021/4/5 删除							<div class="box">-->
-							<!--								<div class="barrage-container-wrap clearfix">-->
-							<!--									<div class="barrage-container" style="overflow: hidden;">-->
-							<!--									</div>-->
-							<!--								</div>-->
-							<!--							</div>-->
+							<div class="box">
+								<div class="barrage-container-wrap clearfix">
+									<div class="barrage-container" style="overflow: hidden;"></div>
+								</div>
+							</div>
 							<div id="video-container" style="float: bottom">
-								<!-- <div id="danmu"></div> -->
+								<div id="danmu"></div>
 								<!-- x5-video-player-type="h5-page"让安卓微信视频使用H5同层播放器以实现弹幕 -->
 								<!-- https://x5.tencent.com/tbs/guide/video.html -->
 								<!-- 两个playsinline让iOS微信视频可仅在全屏状态下播放以实现弹幕 -->
 								<!-- 基本上达到了bilibili网页版的水平 -->
-								<video x5-video-player-type="h5-page" webkit-playsinline="true" playsinline="true" x-webkit-airplay="true" id="video"
-								 class="video-js vjs-big-play-centered vjs-fluid">
+								<video x5-video-player-type="h5-page" webkit-playsinline="true" playsinline="true"
+									   x-webkit-airplay="true" id="video"
+									   class="video-js vjs-big-play-centered vjs-fluid">
 								</video>
 							</div>
 
@@ -102,7 +112,7 @@
 						</div>
 						<!--2021/4/5 替换下一行 <div style="margin-left: 5vw;"> -->
 						<div style="text-align: center;">
-							<!--2021/4/5 删除 <div class="send-wrap">
+							<div class="send-wrap">
 								<input type="text" class="input" placeholder="弹幕发送">
 								<span class="send-btn">发送</span>
 							</div>
@@ -112,11 +122,12 @@
 									<input type="checkbox" id="danmuS" checked>
 									<div class="slider round"></div>
 								</label>
-							</div> -->
+							</div>
 							<div id="danmuSwitch">
-								<!--								<button type="button" class="mdl-chip" onclick="javascrtpt:window.location.href='https://live.bilibili.com/10038913'">-->
-								<!--									<span class="mdl-chip__text">点我跳转到b站同步直播间</span>-->
-								<!--								</button>-->
+								<button type="button" class="mdl-chip"
+										onclick="javascrtpt:window.location.href='https://live.bilibili.com/10038913'">
+									<span class="mdl-chip__text">点我跳转到b站同步直播间</span>
+								</button>
 								<button class="button"
 										style="background-color: #66ccff;border-color: transparent;color: #fff;"
 										onclick="javascrtpt:window.location.href='https://live.bilibili.com/10038913'">
