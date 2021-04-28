@@ -1,9 +1,7 @@
 .box {
-		width: 60vw;
-		height: 33vw;
-		position: relative;
-		z-index: 99;
-		margin-bottom: -33vw;
+		width: 73vw;
+		height: 40vw;
+		position: absolute;
 	}
 
 	.barrage-container-wrap {
@@ -32,6 +30,7 @@
 		position: absolute;
 		white-space: nowrap;
 		cursor: pointer;
+		z-index: 99999;
 		top: 0px;
 		left: 100%;
 		color: #fff;

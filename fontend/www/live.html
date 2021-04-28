@@ -70,13 +70,12 @@
 						<!--						</div>-->
 						<!--2021/4/5 替换下一行 <div style="width:60vw;margin-left: 5vw;margin-bottom: 5vh;margin-top:5vh"> -->
 						<div style="width:75vw;margin-left: 12vw;margin-bottom: 5vh;margin-top:1vh">
-							<div class="box">
-								<div class="barrage-container-wrap clearfix">
-									<div class="barrage-container" style="overflow: hidden;"></div>
-								</div>
-							</div>
 							<div id="video-container" style="float: bottom">
-								<div id="danmu"></div>
+								<div class="box" style="margin-bottom: 0px;">
+									<div class="barrage-container-wrap clearfix">
+										<div class="barrage-container" style="overflow: hidden;"></div>
+									</div>
+								</div>
 								<!-- x5-video-player-type="h5-page"让安卓微信视频使用H5同层播放器以实现弹幕 -->
 								<!-- https://x5.tencent.com/tbs/guide/video.html -->
 								<!-- 两个playsinline让iOS微信视频可仅在全屏状态下播放以实现弹幕 -->
@@ -114,10 +113,6 @@
 								</label>
 							</div>
 							<div id="danmuSwitch">
-								<button type="button" class="mdl-chip"
-										onclick="javascrtpt:window.location.href='https://live.bilibili.com/10038913'">
-									<span class="mdl-chip__text">点我跳转到b站同步直播间</span>
-								</button>
 								<button class="button"
 										style="background-color: #66ccff;border-color: transparent;color: #fff;"
 										onclick="javascrtpt:window.location.href='https://live.bilibili.com/10038913'">
@@ -129,7 +124,7 @@
 							<img src="/files/src/img/temp/list.jpg" style="width: 95%; margin-top: 2vh;"/>
 						</div>
 						{% include '/module/review.html' %}
-						<!-- 评论						<div id="commit">-->
+						<!-- 评论组件						<div id="commit">-->
 						<!--						<div id="disqus_thread"></div>-->
 						<!--						<script>-->
 						<!--						    var disqus_config = function () {-->
@@ -148,9 +143,9 @@
 						{% include '/module/footer.html' %}
 
 				</main>
-				<script id="dsq-count-scr" src="//sser.disqus.com/count.js" async></script>
+<!--				评论组件<script id="dsq-count-scr" src="//sser.disqus.com/count.js" async></script>-->
 	</body>
-	<!-- 2020/4/5 注释 <script src="/files/src/js/danmu.js"></script> -->
+	<script src="/files/src/js/danmu.js"></script>
 	<script>
 		//浏览器判断
 		//见https://blog.csdn.net/AinUser/article/details/78994257
