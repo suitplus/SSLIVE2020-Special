@@ -32,7 +32,7 @@ All the source code in this repository (EXCEPT FOR the code in mdl, src/lib/ and
 
 先用搜索引擎上的教程装好nginx
 
-然后把\Win\nginx-1.18.0\conf\nginx.conf里的配置复制到新的nginx里的nginx.conf里
+然后把\Win\nginx-1.18.0\conf\nginx.conf里的配置复制到新的nginx里的nginx.conf里(记得更改nginx.conf里的ssl证书路径)并启动nginx
 
 然后装python,并用screen这个组件？打开一个新窗口(`screen -S name`创建, `ctrl+a+d` 脱离, `screen -r name` 恢复, `screen -ls`列出列表)
 
@@ -82,7 +82,7 @@ flask_socketio 报错 unsupport client - 把前端js引用的socket.io.js从3.* 
    - [ ] 增加仪表盘，比如在线人数，可以让管理员动态决定买流量，监控有没有人在爆破api接口，及时ban掉非法用户
    - [ ] 主后台增加Config.py里的变量管理控制
    - [ ] 优化实现弹幕管理后台页面
- - [ ] 所有前端弹幕相关代码已被注释因为尚不完善，在活动后取消注释并优化，注释中都有`2021/4`关键词
+ - [x] 所有前端弹幕相关代码已被注释因为尚不完善，在活动后取消注释并优化，注释中都有`2021/4`关键词
  - [ ] ~~体育节直播失败的原因~~
  - [ ] 直播页面优化
    - [x] 在live界面添加推荐使用chrome浏览器提示和b站跳转提示
@@ -93,6 +93,7 @@ flask_socketio 报错 unsupport client - 把前端js引用的socket.io.js从3.* 
    - [ ] 优化前端弹幕css和js文件里不必要的代码
    - [x] 后端或前端筛选不规范（黄暴|敏感）弹幕，~~不予通过~~用*替换，以及不能发网址
    - [ ] 填充config.py下的sensitive_words变量
+   - [ ] 美化前端弹幕控件样式
    - [ ] 用户自定义发送的弹幕样式
  - [ ] BBS?
  - [x] 弹幕功能(使用flask-socketio + socket.io.js)
