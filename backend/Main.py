@@ -1,7 +1,9 @@
-# coding: utf-8
-
+# -*-coding: utf-8 -*-
+# 网站框架
+# 使用`pipreqs ./ --encoding=utf8`生成requirements.txt
 # gevent
 from gevent import monkey
+
 monkey.patch_all()
 
 import danmuServer
@@ -13,6 +15,7 @@ from flask import Flask, render_template, request, make_response, redirect
 import random
 import time
 import requests
+import threading
 
 from flask_cors import CORS, cross_origin
 
@@ -34,6 +37,7 @@ app.config['SECRET_KEY'] = "SECKEY"
 # 路径对应的执行函数，有路径就对应路径名，没路径就对应index
 # 如@app.route('/login') 对应def login()
 @app.route('/')
+# 允许缓存
 # @cache.cached()
 def index():
     # 首页判断
@@ -47,7 +51,7 @@ def index():
 @app.route('/license')
 @cache.cached()
 def license_page():
-    # 授权
+    # 许可
     return render_template('license.html')
 
 
@@ -72,8 +76,8 @@ def IE():
     return render_template('IE.html')
 
 
-# 下面两行调试的时候加，非调试在正式情况下最好去掉
 @app.route('/live')
+# 允许跨域
 @cross_origin()
 # @cache.cached()
 def live():
@@ -99,24 +103,25 @@ def introduction():
     return render_template("introduction.html", inLive=GetLiveState())
 
 
-# 开启直播路径，接受post
+# 开启直播路径，仅接受post
 @app.route('/livestart', methods=['POST'])
 # @cache.cached()
 def liveStart():
     if not Check():
-        # 防止在没token的情况开启直播
-        return "Cookies 失效"
+        # 防止在没token(没管理员权限)的情况开启直播
+        return 401
     ChangeLiveState()
     return "success"
 
 
 @app.route('/cache_clear')
 def cacheclear():
-    # 清楚缓存
+    # 清除缓存
     cache.clear()
     return "finish"
 
 
+# 手动强制https
 @app.before_request
 def before_request():
     # return redirect(bilbil直播间网址,code=301) # 紧急跳转，或在nginx加301跳转
@@ -187,7 +192,7 @@ def Check(a=0, user="Fnull", timel="Fnull", token="Fnull"):
             print("token非法")
         return v
     elif a == 1:
-        # 取token
+        # 新建token
         rkey = str(random.randint(100, 999))
         return config.encryption(rkey, user, timel)
     else:
@@ -196,10 +201,7 @@ def Check(a=0, user="Fnull", timel="Fnull", token="Fnull"):
         return False
 
 
-# 同時支持httph和https方案
-import threading
-
-
+# 配上nginx反向代理&负载均匀多开线程
 def startEach(ip, port):
     https_server = WSGIServer((ip, port), app, certfile=config.ssl_crt,
                               keyfile=config.ssl_key, spawn=200)
@@ -207,6 +209,7 @@ def startEach(ip, port):
     https_server.serve_forever()
 
 
+# 取直播状态
 def GetLiveState():
     url = "http://127.0.0.1:" + str(config.LiveStatePort)
     data = {"type": "G"}
@@ -214,6 +217,7 @@ def GetLiveState():
     return int(res.text)
 
 
+# 更改直播状态
 def ChangeLiveState():
     url = "http://127.0.0.1:" + str(config.LiveStatePort)
     data = {"type": "C"}

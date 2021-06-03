@@ -1,4 +1,5 @@
-import os
+# -*-coding: utf-8 -*-
+# 协调服务器(协调直播状态之类的
 import threading
 import config
 from Main import setup
@@ -9,6 +10,7 @@ from danmuServer import SocketStart
 
 app = Flask(__name__)
 inLive = 0
+# 跨域设置
 CORS(app, resources={r"/*": {"origins": "*"}})
 app.config['SECRET_KEY'] = "SECKEY"
 

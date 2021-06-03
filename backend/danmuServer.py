@@ -1,5 +1,6 @@
-# 官方文档 https://flask-socketio.readthedocs.io/en/latest/
-import re
+# -*-coding: utf-8 -*-
+# 弹幕服务器
+# scoketio(wss)官方文档 https://flask-socketio.readthedocs.io/en/latest/
 import Main
 import config
 from flask import Flask, request
@@ -8,26 +9,35 @@ import time
 import WordsSearch
 
 
+# 每一个被禁言的ip
 class ban:
+    # 目标ip
     ip = ""
+    # 禁言开始时间
     time = 0
 
     def isIp(self, ip):
+        # Is Same
         return self.ip == ip
 
     def __init__(self, ip):
+        # 创建一个被禁言ip
         self.ip = ip
         self.time = int(round(time.time() * 1000))
 
     def isOut(self):
-        # 是否超
+        # 是否超时(即是否失效
         return ((int(round(time.time() * 1000)) - self.time) / 60000.00) >= config.banTime
 
 
 class SingleDanmu:
+    # 内容
     value = ""
+    # 创建时间
     time = 0
+    # 弹幕编号
     id = 0
+    # 发送者ip(用于禁言
     senderIp = ""
 
     def __init__(self, value, ip):
@@ -53,10 +63,12 @@ search = WordsSearch.WordsSearch()
 search.SetKeywords(config.sensitive_words.split('|'))
 
 
+# 刷新禁言名单
 @socketio.on("reFreshBanList")
 def refresh():
     global blackList
     for a in blackList:
+        # 如果到时间就从黑名单去除
         if a.isOut():
             emit("AdmDanmuD", a.ip)
             blackList.remove(a)
@@ -67,7 +79,9 @@ def adding(data):
     global search
     global OnlineWatchers
     global blackList
+    # 从post请求取弹幕内容
     r = data.get("text")
+    # 从请求头获取nginx转发的时候增加的X-Real_IP字段(为该用户ip
     ip = request.headers['X-Real-IP']
     for bip in blackList:
         if bip.isIp(ip):
@@ -97,8 +111,8 @@ def adding(data):
 
 @socketio.on('ban')
 def newban(data):
+    # 从cookie判断token合法,即管理员权限
     if Main.Check():
-        # toekn合法即有权限
         if type(data) == dict:
             print("封禁ip", data['ip'])
             b = ban(data['ip'])
@@ -116,6 +130,7 @@ def newban(data):
     return 404
 
 
+# 广播以同步blacklist
 def banListChange(ip):
     timeStamp = time.localtime(float(ip.time / 1000))
     startTime = time.strftime("%Y-%m-%d %H:%M:%S", timeStamp)
@@ -127,10 +142,12 @@ def banListChange(ip):
                            }, room="Adm", broadcast=True)
 
 
+# 当前在看人数
 def changingInwatcher():
     emit('watchersNum', str(OnlineWatchers), broadcast=True)
 
 
+# 连接弹幕系统事件
 @socketio.on('connect')
 def connect():
     global OnlineWatchers
@@ -147,6 +164,7 @@ def disconnect():
     changingInwatcher()
 
 
+# 管理员连接
 @socketio.on("Adm")
 def Adm(res):
     global OnlineWatchers

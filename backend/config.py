@@ -1,4 +1,6 @@
+# -*-coding:utf-8 -*-
 # 网站配置文件
+# 用于生成md5
 import hashlib
 
 # 账号密码字典集
@@ -36,7 +38,9 @@ Danmu_showPort = 90
 banTime = 5
 # 弹幕中需替换词，用|分割
 sensitive_words = "sb|cnm|nmsl"
+# ssl证书
 ssl_crt = os.path.split(os.path.realpath(__file__))[0] + "\\SSL\\ssersay.cn_chain.crt"
+# ssl证书key
 ssl_key = os.path.split(os.path.realpath(__file__))[0] + "\\SSL\\ssersay.cn_key.key"
 
 

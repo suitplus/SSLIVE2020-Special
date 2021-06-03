@@ -1,0 +1,7 @@
+Flask_SocketIO==5.0.3
+Flask==0.12.2
+pycurl==7.43.0.5
+Flask_Cache==0.13.1
+requests==2.25.1
+gevent==21.1.2
+Flask_Cors==3.0.10
