@@ -75,9 +75,14 @@ flask_socketio 报错 unsupport client - 把前端js引用的socket.io.js从3.* 
 
 **TODO**
 
+ **可选优化路线**
+ 
  - [ ] 使用 [lottie-web](https://github.com/airbnb/lottie-web) + AE 设计并增加动效
  - [ ] 使用figma或同类程序设计网页设计图
  - [ ] 更换vue.js + go的解决方案，react JSX的可读性和易上手度可能会低一点，后端用node.js或ktor也可以，不过go比较轻便
+
+ **可选修复**
+ - [ ] **从md5加密生成cookie换到更安全的SHA-2系列或其他更为安全的方式**
  - [ ] 后台管理页面优化
    - [x] 在弹幕管理后端显示黑名单解禁时间
    - [x] 主后台页面管理优化(样式优化和下面的功能优化)
