@@ -1,4 +1,14 @@
 # SSLIVE2020-Special
+<table>
+        <tr>
+            <td><img width="120" src="https://cdnjs.cloudflare.com/ajax/libs/octicons/8.5.0/svg/rocket.svg" alt="onboarding" /></td>
+            <td><strong>Archived Repository</strong><br />
+             The duty of <b>SSLIVE2020-Special</b> repository is over. Let we look forward to 2021 version!　<br />
+        <strong>This code is still visible, but no longer maintained.</strong>
+        </td>
+        </tr>
+</table>
+
 Use the python flask instead of PHP
 
 使用(html + javascript + css)前端 + (flask + gevent)python后端 + (nginx)负载均衡和反向代理，替换单一的php做后端
